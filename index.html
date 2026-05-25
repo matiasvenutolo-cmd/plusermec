@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plusermec S.A. — Industria Metalúrgica</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --az:#0C2340;--azm:#1A3F6F;--azl:#2563A8;
+  --cel:#4A9EC4;--celf:#E8F4FB;
+  --acc:#1E5B8A;
+  --blanco:#FFFFFF;--fondo:#F5F7FA;--fondo2:#EDF0F5;
+  --txt:#0C1A2E;--txtm:#4E6277;--b:#D4DCE8;--b2:#B8C8D8;
+  --sh:rgba(12,35,64,.06);--sh2:rgba(12,35,64,.14);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--fondo);color:var(--txt);overflow-x:hidden}
+
+
+/* ── HERO INTRO ANIMATIONS ── */
+@keyframes heroFadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@keyframes heroFadeIn{from{opacity:0}to{opacity:1}}
+@keyframes heroImgZoom{from{transform:scale(1.12)}to{transform:scale(1.06)}}
+@keyframes heroLineGrow{from{width:0;opacity:0}to{width:28px;opacity:1}}
+.hero-img{animation:heroImgZoom 1.8s cubic-bezier(.22,1,.36,1) forwards}
+.hero-tag{animation:heroFadeUp .8s .2s cubic-bezier(.22,1,.36,1) both}
+.hero h1{animation:heroFadeUp .9s .4s cubic-bezier(.22,1,.36,1) both}
+.hero-p{animation:heroFadeUp .9s .6s cubic-bezier(.22,1,.36,1) both}
+.hero-btns{animation:heroFadeUp .9s .75s cubic-bezier(.22,1,.36,1) both}
+.hero-stats{animation:heroFadeUp .9s .9s cubic-bezier(.22,1,.36,1) both}
+.hero-scroll{animation:heroFadeIn 1s 1.2s both}
+.sec-kicker::before{animation:heroLineGrow .6s .3s both}
+
+/* ── ANIMACIONES ── */
+.rv{opacity:0;transform:translateY(40px);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1)}
+.rl{opacity:0;transform:translateX(-48px);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1)}
+.rr{opacity:0;transform:translateX(48px);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1)}
+.rs{opacity:0;transform:scale(.94);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1)}
+.on{opacity:1!important;transform:none!important}
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}
+.d4{transition-delay:.28s}.d5{transition-delay:.35s}.d6{transition-delay:.42s}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 56px;height:64px;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
+.nav.solid{background:rgba(12,35,64,.96);backdrop-filter:blur(16px)}
+.logo{text-decoration:none;display:flex;align-items:center;gap:12px}
+.logo-mark{width:32px;height:32px;border:2px solid rgba(255,255,255,.7);border-radius:6px;display:flex;align-items:center;justify-content:center;transition:border-color .3s}
+.logo-mark svg{width:16px;height:16px;fill:none;stroke:rgba(255,255,255,.85);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nav.solid .logo-mark{border-color:var(--cel)}
+.logo-txt{display:flex;flex-direction:column}
+.logo-m{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#fff;letter-spacing:.5px;line-height:1}
+.logo-s{font-size:9px;color:rgba(255,255,255,.45);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.nl{display:flex;gap:2px;list-style:none}
+.nl a{color:rgba(255,255,255,.65);text-decoration:none;font-size:12px;font-weight:400;padding:6px 14px;border-radius:5px;transition:all .2s;letter-spacing:.2px}
+.nl a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.lang-nav{display:flex;gap:2px;background:rgba(255,255,255,.08);border-radius:5px;padding:2px}
+.lnb{font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;background:transparent;border:none;color:rgba(255,255,255,.5);padding:5px 9px;cursor:pointer;border-radius:4px;transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif}
+.lnb:hover{color:#fff}
+.lnb.active{background:rgba(255,255,255,.18);color:#fff}
+.nav-cta{background:var(--cel);color:#fff;padding:9px 22px;font-size:12px;font-weight:600;border:none;cursor:pointer;border-radius:6px;text-decoration:none;transition:all .25s;letter-spacing:.2px}
+.nav-cta:hover{background:#3a8eb4;transform:translateY(-1px);box-shadow:0 4px 14px rgba(74,158,196,.35)}
+.ham{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.ham span{display:block;width:22px;height:2px;background:rgba(255,255,255,.7);transition:all .3s}
+.ham.o span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.ham.o span:nth-child(2){opacity:0}
+.ham.o span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mob{display:none;position:fixed;inset:0;background:var(--az);z-index:190;flex-direction:column;align-items:center;justify-content:center;gap:20px}
+.mob.o{display:flex}
+.mob a{color:rgba(255,255,255,.8);text-decoration:none;font-family:'Space Grotesk',sans-serif;font-size:36px;font-weight:400;transition:color .2s}
+.mob a:hover{color:#fff}
+
+/* ── HERO ── */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+.hero-bg{position:absolute;inset:0}
+.hero-img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.06);transition:transform 8s ease;filter:brightness(.45) saturate(.7)}
+.hero:hover .hero-img{transform:scale(1.02)}
+.hero-grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(12,35,64,.95) 0%,rgba(12,35,64,.5) 50%,rgba(12,35,64,.15) 100%)}
+.hero-noise{position:absolute;inset:0;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");pointer-events:none}
+.hero-content{position:relative;z-index:1;padding:88px 60px 80px}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(74,158,196,.2);border:1px solid rgba(74,158,196,.3);color:var(--cel);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:28px}
+.hero-tag-dot{width:6px;height:6px;background:var(--cel);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-size:58px;font-weight:400;color:#fff;line-height:1;letter-spacing:-1px;margin-bottom:22px;max-width:820px}
+.hero h1 em{font-style:italic;color:rgba(255,255,255,.55)}
+.hero-p{font-size:16px;color:rgba(255,255,255,.6);line-height:1.7;max-width:520px;margin-bottom:40px;font-weight:300}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:64px}
+.btn-wh{background:#fff;color:var(--az);padding:14px 28px;font-size:13px;font-weight:600;border:none;cursor:pointer;border-radius:7px;text-decoration:none;display:inline-block;transition:all .25s}
+.btn-wh:hover{background:var(--celf);transform:translateY(-1px)}
+.btn-gh{color:rgba(255,255,255,.75);font-size:13px;font-weight:400;border:1px solid rgba(255,255,255,.25);padding:14px 24px;cursor:pointer;border-radius:7px;text-decoration:none;display:inline-block;background:rgba(255,255,255,.05);backdrop-filter:blur(8px);transition:all .25s}
+.btn-gh:hover{border-color:rgba(255,255,255,.5);color:#fff}
+.hero-stats{display:flex;gap:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,.1)}
+.hst-n{font-family:'Space Grotesk',sans-serif;font-size:40px;color:#fff;line-height:1}
+.hst-n em{font-style:normal;color:var(--cel);font-size:28px}
+.hst-l{font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+/* scroll cue */
+.hero-scroll{position:absolute;bottom:32px;right:60px;z-index:1;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.5}
+.hero-scroll span{font-size:9px;color:#fff;text-transform:uppercase;letter-spacing:2px;writing-mode:vertical-rl}
+.hero-scroll-line{width:1px;height:40px;background:rgba(255,255,255,.4);position:relative;overflow:hidden}
+.hero-scroll-line::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:#fff;animation:scrollLine 2s ease-in-out infinite}
+@keyframes scrollLine{0%{top:-100%}100%{top:100%}}
+
+/* ── SECCIONES BASE ── */
+.sec{padding:96px 60px;background:var(--blanco)}
+.sec-f{background:var(--fondo)}
+.sec-f2{background:var(--az)}
+.shd{margin-bottom:56px}
+.sec-kicker{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--cel);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.sec-kicker::before{content:'';display:block;width:28px;height:2px;background:var(--cel)}
+.sec-kicker-w{color:rgba(74,158,196,.8)}
+.sec-kicker-w::before{background:rgba(74,158,196,.6)}
+.sttl{font-family:'Space Grotesk',sans-serif;font-size:46px;font-weight:400;color:var(--az);line-height:1.05;letter-spacing:-.5px}
+.sttl-w{color:#fff}
+.ssub{font-size:14px;color:var(--txtm);line-height:1.75;max-width:560px;margin-top:12px;font-weight:300}
+.ssub-w{color:rgba(255,255,255,.5)}
+
+/* ── QUIÉNES SOMOS ── */
+.qs-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.qs-txt p{font-size:15px;color:var(--txtm);line-height:1.9;font-weight:300;margin-bottom:16px}
+.qs-txt p strong{color:var(--az);font-weight:600}
+.qs-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b);border-radius:12px;overflow:hidden;margin-top:36px}
+.qp{background:var(--blanco);padding:22px 18px;text-align:center;transition:background .25s}
+.qp:hover{background:var(--celf)}
+.qp-ico{width:40px;height:40px;background:var(--celf);border-radius:9px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.qp-ico svg{width:20px;height:20px;stroke:var(--azl);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.qp-t{font-size:12px;font-weight:700;color:var(--az);text-transform:uppercase;letter-spacing:.3px;margin-bottom:4px}
+.qp-d{font-size:11px;color:var(--txtm);line-height:1.55;font-weight:300}
+.qs-imgs{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:260px 180px;gap:10px}
+.qs-imgs img{width:100%;height:100%;object-fit:cover;border-radius:12px;display:block;transition:transform .4s}
+.qs-imgs img:hover{transform:scale(1.02)}
+.qs-imgs img:first-child{grid-column:1/-1}
+
+/* ── SERVICIOS — formato horizontal moderno ── */
+.svc-list{display:flex;flex-direction:column;gap:0;border:1.5px solid var(--b);border-radius:14px;overflow:hidden}
+.svc-row{display:grid;grid-template-columns:56px 260px 1fr auto;align-items:center;gap:0;padding:22px 28px;border-bottom:1px solid var(--b);background:var(--blanco);cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.svc-row:last-child{border:none}
+.svc-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--azl);transform:scaleY(0);transform-origin:center;transition:transform .3s}
+.svc-row:hover::before,.svc-row.active::before{transform:scaleY(1)}
+.svc-row:hover,.svc-row.active{background:var(--celf)}
+.svc-row-num{font-family:'Space Grotesk',sans-serif;font-size:28px;color:var(--b2);line-height:1;transition:color .25s}
+.svc-row:hover .svc-row-num,.svc-row.active .svc-row-num{color:var(--azl)}
+.svc-row-name{font-size:15px;font-weight:600;color:var(--az);padding:0 24px}
+.svc-row-tags{display:flex;gap:6px;flex-wrap:wrap}
+.stag{background:var(--fondo2);color:var(--txtm);font-size:10px;font-weight:500;padding:3px 10px;border-radius:20px;letter-spacing:.3px}
+.svc-row:hover .stag{background:rgba(37,99,168,.1);color:var(--azl)}
+.svc-row-arr{width:32px;height:32px;border:1.5px solid var(--b);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .25s;flex-shrink:0;margin-left:24px}
+.svc-row-arr svg{width:14px;height:14px;stroke:var(--txtm);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:all .25s}
+.svc-row:hover .svc-row-arr,.svc-row.active .svc-row-arr{background:var(--azl);border-color:var(--azl)}
+.svc-row:hover .svc-row-arr svg,.svc-row.active .svc-row-arr svg{stroke:#fff;transform:rotate(90deg)}
+.svc-panel{display:none;background:var(--fondo);border-top:1px solid var(--b);padding:24px 28px 24px 108px;animation:fi .3s}
+.svc-panel.open{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.sp-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.sp-grid p{font-size:13px;color:var(--txtm);line-height:1.85;font-weight:300}
+.sp-imgs{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.sp-imgs img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;display:block}
+
+/* ── INDUSTRIAS — compacto ── */
+.ind-scroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.ind-scroll::-webkit-scrollbar{display:none}
+.icard{flex-shrink:0;background:var(--blanco);border:1.5px solid var(--b);border-radius:10px;padding:18px 20px;min-width:160px;transition:all .25s;cursor:default}
+.icard:hover{border-color:var(--azl);box-shadow:0 4px 14px var(--sh2);transform:translateY(-2px)}
+.icard-ico{width:36px;height:36px;background:var(--celf);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;transition:background .25s}
+.icard:hover .icard-ico{background:var(--azl)}
+.icard-ico svg{width:18px;height:18px;stroke:var(--azl);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;transition:stroke .25s}
+.icard:hover .icard-ico svg{stroke:#fff}
+.icard-n{font-size:12px;font-weight:700;color:var(--az);text-transform:uppercase;letter-spacing:.3px;margin-bottom:3px}
+.icard-d{font-size:10px;color:var(--txtm);line-height:1.5;font-weight:300}
+
+/* ── MAQUINARIA ── */
+.maq-wrap{border:1.5px solid var(--b);border-radius:14px;overflow:hidden;background:var(--blanco);display:grid;grid-template-columns:270px 1fr;height:480px}
+.maq-sb{border-right:1.5px solid var(--b);display:flex;flex-direction:column;overflow:hidden}
+.maq-sb-hd{background:var(--az);padding:14px 16px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between}
+.maq-sb-ttl{font-size:11px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:1px}
+.maq-sb-cnt{font-size:10px;color:rgba(255,255,255,.4);margin-top:1px}
+.maq-cats{padding:8px 10px;background:var(--fondo);border-bottom:1px solid var(--b);display:flex;gap:4px;flex-wrap:wrap;flex-shrink:0}
+.mcb{font-size:10px;font-weight:600;color:var(--txtm);background:var(--blanco);border:1px solid var(--b);padding:3px 9px;border-radius:20px;cursor:pointer;transition:all .2s}
+.mcb:hover,.mcb.active{background:var(--azl);border-color:var(--azl);color:#fff}
+.maq-list{overflow-y:auto;flex:1;scrollbar-width:thin;scrollbar-color:var(--b2) transparent}
+.maq-list::-webkit-scrollbar{width:3px}
+.maq-list::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px}
+.mi{padding:10px 13px;border-bottom:1px solid var(--b);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:10px}
+.mi:hover{background:var(--celf)}
+.mi.active{background:var(--celf);border-left:3px solid var(--azl)}
+.mi-ico{width:30px;height:30px;background:var(--fondo);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
+.mi.active .mi-ico{background:var(--azl)}
+.mi-ico svg{width:15px;height:15px;stroke:var(--txtm);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s}
+.mi.active .mi-ico svg{stroke:#fff}
+.mi-top{display:flex;align-items:center;gap:6px;margin-bottom:1px}
+.mi-name{font-size:11.5px;font-weight:600;color:var(--az);line-height:1.3}
+.mi-new{font-size:8px;font-weight:700;background:var(--cel);color:#fff;padding:1px 6px;border-radius:10px;letter-spacing:.5px;text-transform:uppercase}
+.mi-spec{font-size:10px;color:var(--txtm);font-family:monospace}
+.mi-qty{font-size:9px;font-weight:700;color:var(--cel);background:var(--celf);padding:1px 6px;border-radius:10px;display:inline-block;margin-top:2px}
+.maq-det{overflow-y:auto;height:100%;padding:28px 32px;display:flex;align-items:center;justify-content:center;scrollbar-width:thin;scrollbar-color:var(--b2) transparent}
+.maq-det::-webkit-scrollbar{width:3px}
+.maq-det::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px}
+.maq-det-ph{text-align:center}
+.maq-det-ph svg{width:48px;height:48px;stroke:var(--b2);fill:none;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 12px;display:block}
+.maq-det-ph p{font-size:13px;color:var(--txtm);font-weight:300}
+.mdi{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;animation:fi .3s}
+.mdi-img{width:100%;height:200px;object-fit:cover;border-radius:10px;display:block;margin-bottom:12px}
+.mdi-img-ph{width:100%;height:200px;background:var(--celf);border-radius:10px;margin-bottom:12px;display:flex;align-items:center;justify-content:center}
+.mdi-img-ph svg{width:52px;height:52px;stroke:var(--b2);fill:none;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round}
+.mdi-sg{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.mds{background:var(--fondo);border-radius:7px;padding:8px 11px;border:1px solid var(--b)}
+.mds-l{font-size:9px;color:var(--txtm);text-transform:uppercase;letter-spacing:.5px;margin-bottom:1px}
+.mds-v{font-size:12px;font-weight:700;color:var(--az);font-family:monospace}
+.mdi-r{padding-top:4px}
+.mdi-cat{font-size:10px;font-weight:700;color:var(--cel);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.mdi-new-badge{font-size:8px;font-weight:700;background:var(--cel);color:#fff;padding:2px 7px;border-radius:10px;letter-spacing:.5px}
+.mdi-name{font-family:'Space Grotesk',sans-serif;font-size:24px;color:var(--az);margin-bottom:3px;line-height:1.1}
+.mdi-marca{font-size:13px;font-weight:600;color:var(--azl);margin-bottom:14px}
+.mdi-desc{font-size:12px;color:var(--txtm);line-height:1.8;font-weight:300;padding-top:14px;border-top:1px solid var(--b)}
+
+/* ── PROYECTOS ── */
+.proy-g{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.proy-card{background:var(--blanco);border:1.5px solid var(--b);border-radius:14px;overflow:hidden;cursor:pointer;transition:all .3s}
+.proy-card:hover{box-shadow:0 16px 40px var(--sh2);transform:translateY(-4px)}
+.proy-img{position:relative;overflow:hidden;height:200px}
+.proy-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;filter:saturate(.85)}
+.proy-card:hover .proy-img img{transform:scale(1.07);filter:saturate(1)}
+.proy-sector-badge{position:absolute;top:14px;left:14px;padding:4px 12px;border-radius:20px;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;backdrop-filter:blur(8px)}
+.proy-body{padding:20px 22px}
+.proy-client{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.proy-logo-ph{width:36px;height:36px;border-radius:7px;background:var(--fondo2);border:1px solid var(--b);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;font-weight:700;color:var(--txtm)}
+.proy-client-name{font-size:11px;color:var(--txtm);font-weight:500}
+.proy-client-sector{font-size:10px;color:var(--cel);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.proy-ttl{font-family:'Space Grotesk',sans-serif;font-size:18px;color:var(--az);margin-bottom:8px;line-height:1.2}
+.proy-desc{font-size:12px;color:var(--txtm);line-height:1.65;font-weight:300;margin-bottom:14px}
+.proy-techs{display:flex;gap:5px;flex-wrap:wrap}
+.ptech{background:var(--fondo2);color:var(--txtm);font-size:10px;font-weight:500;padding:3px 10px;border-radius:20px}
+
+/* Modal proyecto */
+.modal{display:none;position:fixed;inset:0;background:rgba(12,35,64,.88);z-index:500;align-items:center;justify-content:center;padding:20px}
+.modal.open{display:flex}
+.mbox{background:var(--blanco);max-width:700px;width:100%;border-radius:16px;overflow:hidden;animation:msl .35s cubic-bezier(.22,1,.36,1);max-height:90vh;overflow-y:auto}
+@keyframes msl{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:none}}
+.mbox-img{width:100%;height:220px;object-fit:cover;display:block}
+.mbox-body{padding:28px 30px}
+.mbox-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px}
+.mbox-close{background:var(--fondo);border:1px solid var(--b);width:30px;height:30px;border-radius:50%;font-size:15px;cursor:pointer;color:var(--txtm);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
+.mbox-close:hover{background:var(--b2)}
+.mbox-client{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.mbox-logo-ph{width:40px;height:40px;border-radius:8px;background:var(--fondo2);border:1px solid var(--b);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--txtm)}
+.mbox-cn{font-size:12px;font-weight:600;color:var(--az)}
+.mbox-cs{font-size:10px;color:var(--cel);text-transform:uppercase;letter-spacing:.5px}
+.mbox-ttl{font-family:'Space Grotesk',sans-serif;font-size:26px;color:var(--az);margin-bottom:12px;line-height:1.2}
+.mbox-sector{display:inline-block;padding:4px 12px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
+.mbox-desc{font-size:13px;color:var(--txtm);line-height:1.85;font-weight:300;margin-bottom:18px}
+.mbox-techs-ttl{font-size:10px;font-weight:700;color:var(--az);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.mbox-techs{display:flex;gap:6px;flex-wrap:wrap}
+.mbox-tech{background:var(--celf);color:var(--azl);font-size:11px;font-weight:500;padding:4px 12px;border-radius:20px;border:1px solid var(--b)}
+
+/* Video lightbox */
+.vbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:600;align-items:center;justify-content:center;padding:24px}
+.vbox.open{display:flex}
+.vbi{position:relative;width:100%;max-width:860px}
+.vbc{position:absolute;top:-46px;right:0;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:17px;transition:background .2s}
+.vbc:hover{background:rgba(255,255,255,.25)}
+.vbf{width:100%;aspect-ratio:16/9;border:none;border-radius:10px}
+
+/* ── CONTACTO ── */
+.contact{background:var(--blanco);padding:96px 60px;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+.ci{display:flex;align-items:flex-start;gap:13px;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--b)}
+.ci:last-of-type{border:none}
+.ci-ic{width:36px;height:36px;background:var(--celf);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
+.ci:hover .ci-ic{background:var(--azl)}
+.ci-ic svg{width:17px;height:17px;stroke:var(--azl);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s}
+.ci:hover .ci-ic svg{stroke:#fff}
+.ci-l{font-size:9px;color:var(--txtm);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
+.ci-v{font-size:13px;color:var(--txt)}
+.ci-v a{color:inherit;text-decoration:none;transition:color .2s}.ci-v a:hover{color:var(--azl)}
+.cpers{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:22px}
+.cp{background:var(--fondo);border:1.5px solid var(--b);border-radius:10px;padding:13px;transition:all .25s}
+.cp:hover{border-color:var(--azl);transform:translateY(-2px);box-shadow:0 4px 12px var(--sh)}
+.cp-n{font-size:12px;font-weight:700;color:var(--az);margin-bottom:1px}
+.cp-r{font-size:9px;color:var(--cel);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.cp-t{font-size:11px;color:var(--txtm)}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:9px}
+input,select,textarea{width:100%;background:var(--fondo);border:1.5px solid var(--b);padding:11px 14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;color:var(--txt);border-radius:8px;outline:none;transition:all .2s;display:block}
+input:focus,select:focus,textarea:focus{border-color:var(--azl);background:var(--blanco);box-shadow:0 0 0 3px rgba(37,99,168,.07)}
+textarea{resize:none;height:90px;margin-bottom:9px}
+.fsub{background:var(--az);color:#fff;padding:13px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;border:none;cursor:pointer;border-radius:8px;width:100%;transition:all .2s}
+.fsub:hover{background:var(--azm);transform:translateY(-1px);box-shadow:0 4px 12px rgba(12,35,64,.18)}
+.fok{display:none;background:#e8f5e9;border:1.5px solid #a5d6a7;padding:12px;border-radius:8px;font-size:12px;color:#2e7d32;margin-top:8px;text-align:center}
+
+/* ── FOOTER ── */
+.footer{background:var(--az);padding:36px 60px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.fl{text-decoration:none}
+.fl-m{font-family:'Space Grotesk',sans-serif;font-size:18px;color:#fff;font-style:italic}
+.fl-s{font-size:8px;color:rgba(255,255,255,.35);letter-spacing:2px;text-transform:uppercase;margin-top:2px;display:block}
+.flinks{display:flex;gap:16px}
+.flinks a{font-size:11px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s}
+.flinks a:hover{color:#fff}
+.footer-by{font-size:10px;color:rgba(255,255,255,.25);text-align:right;line-height:1.6}
+.footer-by a{color:rgba(255,255,255,.4);text-decoration:none;font-weight:600;transition:color .2s}
+.footer-by a:hover{color:var(--cel)}
+
+/* ── RESP ── */
+@media(max-width:960px){
+  .nav{padding:0 20px}
+  .nl,.nav-cta{display:none}.ham{display:flex}
+  .hero h1{font-size:48px}
+  .hero-content{padding:0 24px 60px}
+  .hero-scroll{display:none}
+  .qs-grid,.proy-grid-modal,.contact{grid-template-columns:1fr;gap:28px}
+  .proy-g{grid-template-columns:1fr 1fr}
+  .maq-wrap{grid-template-columns:1fr;height:auto}
+  .maq-sb{max-height:250px}
+  .maq-det{height:auto;min-height:300px}
+  .mdi{grid-template-columns:1fr}
+  .svc-row{grid-template-columns:40px 1fr auto;gap:0}
+  .svc-row-tags{display:none}
+  .sp-grid{grid-template-columns:1fr}
+  .ind-scroll{flex-wrap:nowrap}
+  .sec{padding:60px 20px}
+  .footer{padding:28px 20px;flex-direction:column;align-items:flex-start}.flinks{display:none}
+}
+@media(max-width:560px){
+  .hero h1{font-size:36px}
+  .proy-g,.qs-pillars{grid-template-columns:1fr}
+  .fr{grid-template-columns:1fr}
+  .sttl{font-size:34px}
+  .cpers{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#" class="logo">
+    <div class="logo-mark"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+    <div class="logo-txt"><span class="logo-m">PLUSERMEC S.A.</span><span class="logo-s">Industria Metalúrgica</span></div>
+  </a>
+  <ul class="nl">
+    <li><a href="#quienes" data-i="nav_q">Quiénes somos</a></li>
+    <li><a href="#servicios" data-i="nav_s">Servicios</a></li>
+    <li><a href="#maquinaria" data-i="nav_m">Maquinaria</a></li>
+    <li><a href="#proyectos" data-i="nav_p">Proyectos</a></li>
+    <li><a href="#contacto" data-i="nav_c">Contacto</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:10px">
+    <div class="lang-nav">
+      <button class="lnb active" onclick="setLang('es')">ES</button>
+      <button class="lnb" onclick="setLang('en')">EN</button>
+      <button class="lnb" onclick="setLang('pt')">PT</button>
+    </div>
+    <a href="#contacto" class="nav-cta" data-i="cta">Consultar</a>
+  </div>
+  <button class="ham" id="ham"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob" id="mob">
+  <a href="#quienes" class="ml">Quiénes somos</a>
+  <a href="#servicios" class="ml">Servicios</a>
+  <a href="#maquinaria" class="ml">Maquinaria</a>
+  <a href="#proyectos" class="ml">Proyectos</a>
+  <a href="#contacto" class="ml">Contacto</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <img class="hero-img" src="https://plusermec.com.ar/wp-content/uploads/2025/10/IMG-20251003-WA0195.jpeg" alt="Taller Plusermec">
+    <div class="hero-grad"></div>
+    <div class="hero-noise"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag"><div class="hero-tag-dot"></div><span data-i="hero_tag">Industria Metalúrgica · Desde 1976</span></div>
+    <h1 class="" data-i="hero_h1">Precisión industrial<br>para los proyectos<br>más <em>exigentes</em></h1>
+    <p class="hero-p" data-i="hero_p">50 años fabricando, reparando y mecanizando con el rigor técnico que la industria demanda. Tornería CNC, alesadoras de gran porte, construcciones metálicas y mucho más.</p>
+    <div class="hero-btns">
+      <a href="#proyectos" class="btn-wh" data-i="hero_b1">Ver proyectos</a>
+      <a href="#maquinaria" class="btn-gh" data-i="hero_b2">Nuestra maquinaria</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hst-n">1976</div><div class="hst-l" data-i="st1">Fundación</div></div>
+      <div><div class="hst-n">50<em>+</em></div><div class="hst-l" data-i="st2">Años de trayectoria</div></div>
+      <div><div class="hst-n">30<em>+</em></div><div class="hst-l" data-i="st3">Máquinas en taller</div></div>
+    </div>
+  </div>
+  <div class="hero-scroll"><span>Scroll</span><div class="hero-scroll-line"></div></div>
+</section>
+
+<!-- QUIÉNES SOMOS -->
+<section class="sec" id="quienes">
+  <div class="qs-grid">
+    <div class="rl">
+      <div class="shd">
+        <div class="sec-kicker" data-i="q_kick">Quiénes somos</div>
+        <div class="sttl" data-i="q_ttl">Experiencia que<br>se mide en décadas</div>
+      </div>
+      <div class="qs-txt">
+        <p data-i="q_p1">Fundada en 1976 en Remedios de Escalada, Plusermec S.A. no es solo un taller: es una empresa con <strong>casi 50 años de saber técnico acumulado</strong>. Cada pieza que sale de nuestro taller carga esa historia.</p>
+        <p data-i="q_p2">Trabajamos con la industria más exigente del país. Minería, oil & gas, naval, siderúrgica. Clientes que no toleran errores y que eligen Plusermec porque saben que <strong>el trabajo va a quedar bien, en tiempo y a escala</strong>.</p>
+        <p data-i="q_p3">Tenemos la capacidad de asesorar, relevar y resolver piezas en cualquier punto del país. No hacemos solo lo que entra en el torno — adaptamos el equipamiento al problema.</p>
+      </div>
+      <div class="qs-pillars">
+        <div class="qp rv d1">
+          <div class="qp-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4"/></svg></div>
+          <div class="qp-t" data-i="qp1t">Precisión</div>
+          <div class="qp-d" data-i="qp1d">Tolerancias estrictas en cada trabajo</div>
+        </div>
+        <div class="qp rv d2">
+          <div class="qp-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div class="qp-t" data-i="qp2t">Calidad</div>
+          <div class="qp-d" data-i="qp2d">50 años de estándares comprobados</div>
+        </div>
+        <div class="qp rv d3">
+          <div class="qp-ico"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+          <div class="qp-t" data-i="qp3t">Respuesta</div>
+          <div class="qp-d" data-i="qp3d">Capacidad para proyectos urgentes</div>
+        </div>
+      </div>
+    </div>
+    <div class="rr">
+      <div class="qs-imgs">
+        <img src="https://plusermec.com.ar/wp-content/uploads/2025/07/IMG-20250725-WA0121-768x576.jpeg" alt="">
+        <img src="https://plusermec.com.ar/wp-content/uploads/2025/10/IMG-20250725-WA0229-1024x768.jpeg" alt="">
+        <img src="https://plusermec.com.ar/wp-content/uploads/2025/10/20251003_155855-COLLAGE.jpeg" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIAS -->
+<section class="sec sec-f" id="industrias" style="padding-top:0;padding-bottom:48px">
+  <div class="ind-scroll rv">
+    <div class="icard d1"><div class="icard-ico"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><div class="icard-n" data-i="in1">Minería</div><div class="icard-d" data-i="id1">Tromeles, cintas, estructuras</div></div>
+    <div class="icard d2"><div class="icard-ico"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 12H2"/></svg></div><div class="icard-n" data-i="in2">Oil & Gas</div><div class="icard-d" data-i="id2">Bombeo, válvulas, bridas</div></div>
+    <div class="icard d3"><div class="icard-ico"><svg viewBox="0 0 24 24"><path d="M2 21c0 0 4-2 10-2s10 2 10 2M12 3v12M5 10l7-7 7 7M3 17l2-4h14l2 4"/></svg></div><div class="icard-n" data-i="in3">Naval</div><div class="icard-d" data-i="id3">Ejes, hélices, propulsión</div></div>
+    <div class="icard d4"><div class="icard-ico"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M12 12v5M8 12v5M16 12v5"/></svg></div><div class="icard-n" data-i="in4">Siderúrgica</div><div class="icard-d" data-i="id4">Rodillos, ejes, engranajes</div></div>
+    <div class="icard d1"><div class="icard-ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg></div><div class="icard-n" data-i="in5">Papelera</div><div class="icard-d" data-i="id5">Rodillos, ejes, bombas</div></div>
+    <div class="icard d2"><div class="icard-ico"><svg viewBox="0 0 24 24"><path d="M9 3h6M9 3v8l-4 9h14l-4-9V3M9 3H7M15 3h2"/><circle cx="12" cy="17" r="1"/></svg></div><div class="icard-n" data-i="in6">Química</div><div class="icard-d" data-i="id6">Agitadores, intercambiadores</div></div>
+    <div class="icard d3"><div class="icard-ico"><svg viewBox="0 0 24 24"><path d="M2 20h20M4 20V10l8-8 8 8v10M10 20v-5h4v5"/></svg></div><div class="icard-n" data-i="in7">Construcción</div><div class="icard-d" data-i="id7">Estructuras, plataformas</div></div>
+    <div class="icard d4"><div class="icard-ico"><svg viewBox="0 0 24 24"><path d="M3 6c0 0 4-2 9-2s9 2 9 2M3 12c0 0 4-2 9-2s9 2 9 2M3 18c0 0 4-2 9-2s9 2 9 2"/></svg></div><div class="icard-n" data-i="in8">Textil</div><div class="icard-d" data-i="id8">Rodillos, piezas de precisión</div></div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="sec" id="servicios">
+  <div class="shd rv">
+    <div class="sec-kicker" data-i="s_kick">Capacidades técnicas</div>
+    <div class="sttl" data-i="s_ttl">Lo que hacemos</div>
+    <p class="ssub" data-i="s_sub">Clic en cada capacidad para ver más detalle.</p>
+  </div>
+  <div class="svc-list rv">
+    <div class="svc-row" data-s="s1">
+      <div class="svc-row-num">01</div>
+      <div class="svc-row-name" data-i="s1n">Mecanizado de precisión</div>
+      <div class="svc-row-tags"><span class="stag">CNC</span><span class="stag">Tornería</span><span class="stag">Fresado</span><span class="stag">Alesado</span><span class="stag">Rectificado</span></div>
+      <div class="svc-row-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+    <div class="svc-panel" id="sp-s1"><div class="sp-grid"><p data-i="sd1p">El mecanizado de precisión es el núcleo de nuestro trabajo. Torneamos, fresamos, alesamos y rectificamos piezas industriales con tolerancias desde ±0,01mm, cumpliendo los requerimientos más exigentes de la industria pesada. Trabajamos ejes de transmisión, coronas dentadas, rodillos industriales, camisas de cilindro, bridas, pistas de rodadura y cualquier componente rotativo o prismático. Operamos en aceros al carbono, inoxidables AISI 304/316, bronces, fundición gris y nodular, y aleaciones especiales. Para piezas de gran porte, contamos con capacidad de volteo hasta Ø2000mm y 4000mm entre puntas — una de las mayores de la región — con tornos POREBA, TRAVIS, TURRI, PPL y TRAUB, y un Centro de Mecanizado CNC TRAVIS para operaciones múltiples en una sola sujección.</p><div class="sp-imgs"><img src="https://plusermec.com.ar/wp-content/uploads/2025/10/20251003_155855-COLLAGE.jpeg" alt=""><img src="https://plusermec.com.ar/wp-content/uploads/2025/10/IMG-20251003-WA0195.jpeg" alt=""></div></div></div>
+
+    <div class="svc-row" data-s="s2">
+      <div class="svc-row-num">02</div>
+      <div class="svc-row-name" data-i="s2n">Fabricación de repuestos</div>
+      <div class="svc-row-tags"><span class="stag">Planos o muestras</span><span class="stag">Engranajes</span><span class="stag">Series cortas</span></div>
+      <div class="svc-row-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+    <div class="svc-panel" id="sp-s2"><div class="sp-grid"><p data-i="sd2p">Cuando una pieza se rompe o se desgasta y no hay repuesto disponible en el mercado, Plusermec la fabrica. Reproducimos cualquier componente mecánico a partir de un plano técnico, una muestra física o simplemente las medidas relevadas en planta. Fabricamos engranajes rectos, helicoidales y cónicos para cajas de transmisión industrial, así como bujes, casquillos, arandelas de empuje, chavetas, árboles y todo tipo de elementos de máquinas. Nuestras fresadoras CNC permiten micromecanizados con fresas desde 0,5mm para electrodos y matrices de alta precisión. Trabajamos en acero, inoxidable, bronce, aluminio, plástico de ingeniería y materiales especiales.</p><div class="sp-imgs"><img src="https://plusermec.com.ar/wp-content/uploads/2025/10/matriz-1024x679.png" alt=""><img src="https://plusermec.com.ar/wp-content/uploads/2025/10/IMG-20250725-WA0229-1024x768.jpeg" alt=""></div></div></div>
+
+    <div class="svc-row" data-s="s3">
+      <div class="svc-row-num">03</div>
+      <div class="svc-row-name" data-i="s3n">Reparación y mantenimiento</div>
+      <div class="svc-row-tags"><span class="stag">Cilindros hidráulicos</span><span class="stag">Tromeles</span><span class="stag">Preventivo</span><span class="stag">In situ</span></div>
+      <div class="svc-row-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+    <div class="svc-panel" id="sp-s3"><div class="sp-grid"><p data-i="sd3p">El objetivo de cada intervención de reparación es devolver la pieza a sus condiciones originales de operación — o mejorarlas. Recuperamos cilindros hidráulicos con vástagos rayados o desgastados, reparamos cuerpos de bombas y válvulas industriales, reconstruimos asientos de rodamientos con cromado duro o metalización, y corregimos geometrías en piezas que sufrieron impactos o deformaciones. Para equipos que no pueden ingresar al taller, nos desplazamos a planta con equipamiento portátil. Trabajamos bajo tiempo de parada controlado, coordinando con el área de mantenimiento del cliente para minimizar el impacto en la producción.</p><div class="sp-imgs"><img src="https://plusermec.com.ar/wp-content/uploads/2025/10/tromel-1024x684.png" alt=""><img src="https://plusermec.com.ar/wp-content/uploads/2025/10/IMG-20250725-WA0015.jpeg" alt=""></div></div></div>
+
+    <div class="svc-row" data-s="s4">
+      <div class="svc-row-num">04</div>
+      <div class="svc-row-name" data-i="s4n">Diseño y fabricación a medida</div>
+      <div class="svc-row-tags"><span class="stag">CAD</span><span class="stag">Cintas</span><span class="stag">Silos</span><span class="stag">Estructuras metálicas</span></div>
+      <div class="svc-row-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+    <div class="svc-panel" id="sp-s4"><div class="sp-grid"><p data-i="sd4p">Cuando el mercado no tiene lo que el proceso productivo necesita, lo diseñamos y construimos. Desarrollamos equipos industriales a medida: sistemas de transporte de material (cintas modulares de hasta 22 metros), silos y tolvas de almacenamiento, separadores, bombas para sólidos y dispositivos de manipulación especiales. El proceso parte del relevamiento de necesidades, continúa con el diseño en CAD con cálculo estructural y de proceso, y termina con la fabricación completa en taller y el montaje con equipo propio en planta. Entregamos el equipo funcionando, no solo fabricado. Materiales según especificación del cliente o industria: acero estructural, inoxidable sanitario o industrial, o materiales especiales según el fluido o producto en contacto.</p><div class="sp-imgs"><img src="https://plusermec.com.ar/wp-content/uploads/2025/10/CINTA-2-1024x722.png" alt=""><img src="https://plusermec.com.ar/wp-content/uploads/2025/10/silo-1024x668.png" alt=""></div></div></div>
+
+    <div class="svc-row" data-s="s5">
+      <div class="svc-row-num">05</div>
+      <div class="svc-row-name" data-i="s5n">Soldaduras especiales</div>
+      <div class="svc-row-tags"><span class="stag">Hardox</span><span class="stag">Inoxidable</span><span class="stag">TIG</span><span class="stag">MIG/MAG</span><span class="stag">Alta aleación</span></div>
+      <div class="svc-row-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+    <div class="svc-panel" id="sp-s5"><div class="sp-grid"><p data-i="sd5p">La soldadura en la industria pesada no es solo unir piezas: es garantizar integridad estructural bajo condiciones extremas de carga, vibración, temperatura o abrasión. En Plusermec trabajamos con procesos TIG y MIG/MAG sobre aceros inoxidables AISI 304 y 316, aluminio, aceros de alta aleación y Hardox. Aplicamos recubrimientos de Hardox 400 y 500 sobre superficies expuestas a abrasión severa — una técnica que puede multiplicar por cinco o más la vida útil de una pieza. Realizamos también construcciones estructurales de gran porte: bastidores, estructuras de soporte, pasarelas y equipos de más de 10 toneladas. Nuestro personal está calificado en procedimientos de soldadura para aplicaciones industriales críticas.</p><div class="sp-imgs"><img src="https://plusermec.com.ar/wp-content/uploads/2025/10/IMG_20200301_115607117-1024x576.jpeg" alt=""><img src="https://plusermec.com.ar/wp-content/uploads/2025/10/IMG_20210510_130438739-1024x484.jpeg" alt=""></div></div></div>
+  </div>
+</section>
+
+<!-- MAQUINARIA -->
+<section class="sec sec-f" id="maquinaria">
+  <div class="shd rv">
+    <div class="sec-kicker" data-i="m_kick">Parque técnico</div>
+    <div class="sttl" data-i="m_ttl">Nuestra maquinaria</div>
+    <p class="ssub" data-i="m_sub">Seleccioná una máquina para ver sus especificaciones técnicas.</p>
+  </div>
+  <div class="maq-wrap rv">
+    <div class="maq-sb">
+      <div class="maq-sb-hd">
+        <div><div class="maq-sb-ttl" data-i="ml_t">Equipamiento</div><div class="maq-sb-cnt" data-i="ml_s">20 máquinas</div></div>
+      </div>
+      <div class="maq-cats">
+        <button class="mcb active" data-cat="all" data-i="cat_all">Todas</button>
+        <button class="mcb" data-cat="cnc" data-i="cat_cnc">CNC</button>
+        <button class="mcb" data-cat="torno" data-i="cat_tor">Tornos</button>
+        <button class="mcb" data-cat="ales" data-i="cat_ale">Alesadoras</button>
+        <button class="mcb" data-cat="fres" data-i="cat_fre">Fresadoras</button>
+        <button class="mcb" data-cat="otros" data-i="cat_otr">Otros</button>
+      </div>
+      <div class="maq-list" id="maqList"></div>
+    </div>
+    <div class="maq-det" id="maqDet">
+      <div class="maq-det-ph">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M3 9h18M3 15h18"/></svg>
+        <p data-i="maq_sel">Seleccioná una máquina</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROYECTOS -->
+<section class="sec" id="proyectos">
+  <div class="shd rv">
+    <div class="sec-kicker" data-i="p_kick">Portfolio</div>
+    <div class="sttl" data-i="p_ttl">Proyectos realizados</div>
+    <p class="ssub" data-i="p_sub">Trabajos ejecutados para clientes de distintos sectores industriales. Clic para ver detalle.</p>
+  </div>
+  <div class="proy-g" id="proyGrid"></div>
+</section>
+
+<!-- CONTACTO -->
+<section class="contact" id="contacto">
+  <div class="rl">
+    <div class="sec-kicker" style="margin-bottom:14px" data-i="c_kick">Hablemos</div>
+    <div class="sttl" style="margin-bottom:24px" data-i="c_ttl">Contacto</div>
+    <div class="ci"><div class="ci-ic"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="ci-l" data-i="c_dir">Dirección</div><div class="ci-v">Alvear 2944, Remedios de Escalada (1826)<br>Buenos Aires, Argentina</div></div></div>
+    <div class="ci"><div class="ci-ic"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.36 13.1a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 16.92z"/></svg></div><div><div class="ci-l" data-i="c_tel">Teléfono</div><div class="ci-v"><a href="tel:01160799302">(011) 60799302</a></div></div></div>
+    <div class="ci"><div class="ci-ic"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="ci-l">Email</div><div class="ci-v"><a href="mailto:plusermec@plusermec.com.ar">plusermec@plusermec.com.ar</a></div></div></div>
+    <div class="cpers">
+      <div class="cp"><div class="cp-n">GRIOLI Adrián</div><div class="cp-r" data-i="cp_r">Contacto</div><div class="cp-t">011 15 6241 2203</div></div>
+      <div class="cp"><div class="cp-n">GRIOLI Pablo</div><div class="cp-r">Contacto</div><div class="cp-t">011 15 6449 6511</div></div>
+      <div class="cp"><div class="cp-n">GRIOLI Salvador</div><div class="cp-r">Contacto</div><div class="cp-t">011 15 5525 4117</div></div>
+    </div>
+  </div>
+  <div class="rr">
+    <div class="sec-kicker" style="margin-bottom:14px" data-i="f_kick">Formulario</div>
+    <div class="fr"><input type="text" placeholder="Nombre" data-ph="pN"><input type="text" placeholder="Empresa" data-ph="pE"></div>
+    <div class="fr"><input type="email" placeholder="Email" data-ph="pM"><input type="text" placeholder="Teléfono" data-ph="pT"></div>
+    <select style="margin-bottom:9px"><option data-i="fo1">Seleccioná un servicio</option><option>Mecanizado de precisión</option><option>Fabricación de repuestos</option><option>Reparación y mantenimiento</option><option>Diseño y fabricación</option><option>Soldaduras especiales</option></select>
+    <textarea placeholder="Describí tu proyecto o consulta..." data-ph="pMg"></textarea>
+    <button class="fsub" id="fsub" data-i="f_btn">Enviar consulta</button>
+    <div class="fok" id="fok" data-i="f_ok">✓ Consulta enviada. Nos ponemos en contacto a la brevedad.</div>
+  </div>
+</section>
+
+<div class="vbox" id="vbox"><div class="vbi"><button class="vbc" onclick="closeVideo()">✕</button><iframe class="vbf" id="vframe" src="" allowfullscreen></iframe></div></div>
+
+<footer class="footer">
+  <a href="#" class="fl"><span class="fl-m">Plusermec S.A.</span><span class="fl-s">Industria Metalúrgica · Desde 1976</span></a>
+  <div class="flinks">
+    <a href="#quienes" data-i="nav_q">Quiénes somos</a><a href="#servicios" data-i="nav_s">Servicios</a>
+    <a href="#maquinaria" data-i="nav_m">Maquinaria</a><a href="#proyectos" data-i="nav_p">Proyectos</a>
+    <a href="#contacto" data-i="nav_c">Contacto</a>
+  </div>
+  <div class="footer-by">© 2026 Plusermec S.A.<br>Design by <a href="https://pinaro.ar" target="_blank">pinaro.ar</a></div>
+</footer>
+
+<script>
+// ── SECTOR COLORS ──────────────────────────────────────────────────────────
+const SECTOR_COLORS = {
+  'Oil & Gas':    {bg:'rgba(217,119,6,.12)',  color:'#b45309',  border:'rgba(217,119,6,.25)'},
+  'Minería':      {bg:'rgba(120,53,15,.1)',   color:'#92400e',  border:'rgba(120,53,15,.2)'},
+  'Alimentos':    {bg:'rgba(22,101,52,.1)',   color:'#166534',  border:'rgba(22,101,52,.2)'},
+  'Automotriz':   {bg:'rgba(30,64,175,.1)',   color:'#1e40af',  border:'rgba(30,64,175,.2)'},
+  'Siderúrgica':  {bg:'rgba(71,85,105,.1)',   color:'#334155',  border:'rgba(71,85,105,.2)'},
+  'Naval':        {bg:'rgba(7,89,133,.12)',   color:'#075985',  border:'rgba(7,89,133,.25)'},
+  'Industrial':   {bg:'rgba(12,35,64,.1)',    color:'#0c2340',  border:'rgba(12,35,64,.2)'},
+  'Plástico':     {bg:'rgba(109,40,217,.1)',  color:'#7c3aed',  border:'rgba(109,40,217,.2)'},
+};
+
+// ── PROYECTOS DATA ─────────────────────────────────────────────────────────
+const PROYECTOS = [
+  {
+    id:'p1', sector:'Alimentos', cliente:'Industria Avícola', clienteAbrev:'IA',
+    img:'https://plusermec.com.ar/wp-content/uploads/2025/10/IMG-20211005-WA0033-576x1024.jpeg',
+    ttl:'Cinta transportadora doble — 22 m de longitud',
+    desc:'Sistema de evacuación de residuos de proceso con dos cintas paralelas. 22 metros de longitud y 5 metros de altura con descarga directa sobre volquetes.',
+    desc_larga:'Proyecto de diseño y fabricación integral: desde el relevamiento de necesidades, el diseño estructural en CAD, la fabricación completa en taller y la puesta en marcha en planta. El sistema opera en condiciones de alta humedad y temperatura, por lo que se priorizaron materiales anticorrosivos y un diseño de fácil mantenimiento.',
+    techs:['Diseño CAD','Fabricación estructural','Mecanizado CNC','Puesta en marcha'],
+    video: null
+  },
+  {
+    id:'p2', sector:'Industrial', cliente:'Cliente industrial', clienteAbrev:'CI',
+    img:'https://plusermec.com.ar/wp-content/uploads/2025/10/tromel-1024x684.png',
+    ttl:'Recuperación de pista en tromel industrial — Ø 3 metros',
+    desc:'Reemplazo y mecanizado de la pista de rodadura de un tromel de 3 metros de diámetro, pieza clave en un sistema de producción continua.',
+    desc_larga:'La pista original presentaba desgaste severo. Se desmontó y soldó una nueva pista en taller. Se adaptó la alesadora de gran porte para mecanizar un diámetro fuera de rango. Ajustes finos para alineación y concentricidad. Montaje en planta garantizando funcionamiento sin vibraciones. Plazo de entrega: 12 días.',
+    techs:['Alesado de gran porte','Soldadura estructural','Ajuste de precisión','Montaje in situ'],
+    video: null
+  },
+  {
+    id:'p3', sector:'Industrial', cliente:'Planta industrial', clienteAbrev:'PI',
+    img:'https://plusermec.com.ar/wp-content/uploads/2025/10/IMG_20200301_115607117-1024x576.jpeg',
+    ttl:'Fabricación y montaje de estructura metálica',
+    desc:'Estructura de gran porte para planta industrial. Diseño, corte, soldadura y montaje íntegramente realizados por el equipo de Plusermec.',
+    desc_larga:'Proyecto llave en mano que incluyó el relevamiento en planta, el diseño estructural, la fabricación completa en taller y el montaje con equipo propio. Material: acero estructural de alta resistencia. Soldadura certificada. Carga de diseño: 20 toneladas.',
+    techs:['Diseño estructural','Soldadura de alta resistencia','Montaje industrial','Coordinación logística'],
+    video: null
+  },
+  {
+    id:'p4', sector:'Industrial', cliente:'Empresa manufacturera', clienteAbrev:'EM',
+    img:'https://plusermec.com.ar/wp-content/uploads/2025/10/silo-1024x668.png',
+    ttl:'Diseño y fabricación de silo industrial a medida',
+    desc:'Silo de almacenamiento para producto sólido. Capacidad y dimensiones adaptadas al requerimiento específico del cliente.',
+    desc_larga:'El proyecto incluyó el cálculo de capacidad, diseño de tolva y boca de salida, fabricación en acero inoxidable AISI 304 y montaje en planta. Superficie interior pulida Ra 1,6. Conexiones según normas del cliente.',
+    techs:['Inoxidable AISI 304','Diseño de proceso','Fabricación a medida','Acabado sanitario'],
+    video: null
+  },
+  {
+    id:'p5', sector:'Industrial', cliente:'Cliente metalúrgico', clienteAbrev:'CM',
+    img:'https://plusermec.com.ar/wp-content/uploads/2025/10/valvula-1024x784.png',
+    ttl:'Rectificación de esclusa con enchapado en Hardox',
+    desc:'Rectificación precisa de agujero de esclusa y aplicación de Hardox como recubrimiento anti desgaste para extender la vida útil de la pieza.',
+    desc_larga:'El Hardox (acero anti desgaste de alta dureza) fue soldado, mecanizado y ajustado en tolerancia sobre la pieza original. La intervención extendió la vida útil estimada de 3 meses a más de 2 años de operación continua. Proceso: desmontaje → soldadura Hardox → alesado de terminación → control dimensional.',
+    techs:['Hardox anti desgaste','Soldadura especial','Alesado de terminación','Control dimensional'],
+    video: null
+  },
+  {
+    id:'p6', sector:'Industrial', cliente:'Industria del plástico', clienteAbrev:'IP',
+    img:'https://plusermec.com.ar/wp-content/uploads/2025/10/IMG-20250725-WA0015.jpeg',
+    ttl:'Reparación de triturador molino para reciclado de plástico',
+    desc:'Reparación y cambio de rodamientos en triturador industrial. Restauración de dimensiones originales con mecanizado de precisión.',
+    desc_larga:'El eje principal del triturador presentaba desgaste en asientos de rodamientos. Se realizó el mecanizado de los asientos, el montaje de rodamientos nuevos con ajuste a presión en prensa hidráulica 100T y la verificación de alineación. Tiempo de intervención: 48 horas para no parar la línea más de lo necesario.',
+    techs:['Mecanizado de ejes','Prensa hidráulica 100T','Rodamientos industriales','Alineación láser'],
+    video: 'dQw4w9WgXcQ'
+  },
+];
+
+// Render proyectos
+function renderProyectos() {
+  const grid = document.getElementById('proyGrid');
+  grid.innerHTML = PROYECTOS.map((p, i) => {
+    const sc = SECTOR_COLORS[p.sector] || SECTOR_COLORS['Industrial'];
+    return `
+    <div class="proy-card rv d${(i%3)+1}" data-pid="${p.id}">
+      <div class="proy-img">
+        <img src="${p.img}" alt="${p.ttl}">
+        <div class="proy-sector-badge" style="background:${sc.bg};color:${sc.color};border:1px solid ${sc.border}">${p.sector}</div>
+      </div>
+      <div class="proy-body">
+        <div class="proy-client">
+          <div class="proy-logo-ph">${p.clienteAbrev}</div>
+          <div><div class="proy-client-name">${p.cliente}</div><div class="proy-client-sector">${p.sector}</div></div>
+        </div>
+        <div class="proy-ttl">${p.ttl}</div>
+        <div class="proy-desc">${p.desc}</div>
+        <div class="proy-techs">${p.techs.map(t=>`<span class="ptech">${t}</span>`).join('')}</div>
+      </div>
+    </div>`;
+  }).join('');
+  // re-observe new cards
+  document.querySelectorAll('.proy-card').forEach(el => obs.observe(el));
+  document.querySelectorAll('.proy-card').forEach(card => {
+    card.addEventListener('click', () => openProyecto(card.dataset.pid));
+  });
+}
+
+function openProyecto(pid) {
+  const p = PROYECTOS.find(x => x.id === pid);
+  const sc = SECTOR_COLORS[p.sector] || SECTOR_COLORS['Industrial'];
+  const modal = document.createElement('div');
+  modal.className = 'modal open';
+  modal.id = 'pModal';
+  modal.innerHTML = `<div class="mbox">
+    ${p.video
+      ? `<div style="position:relative;padding-bottom:56.25%;background:#000"><iframe style="position:absolute;inset:0;width:100%;height:100%;border:none" src="https://www.youtube.com/embed/${p.video}" allowfullscreen></iframe></div>`
+      : `<img class="mbox-img" src="${p.img}" alt="${p.ttl}">`}
+    <div class="mbox-body">
+      <div class="mbox-hd">
+        <div>
+          <div class="mbox-client">
+            <div class="mbox-logo-ph">${p.clienteAbrev}</div>
+            <div><div class="mbox-cn">${p.cliente}</div><div class="mbox-cs">${p.sector}</div></div>
+          </div>
+        </div>
+        <button class="mbox-close" onclick="document.getElementById('pModal').remove()">✕</button>
+      </div>
+      <div class="mbox-sector" style="background:${sc.bg};color:${sc.color};border:1px solid ${sc.border}">${p.sector}</div>
+      <div class="mbox-ttl">${p.ttl}</div>
+      <p class="mbox-desc">${p.desc_larga}</p>
+      <div class="mbox-techs-ttl" data-i="techs_lbl">Tecnologías involucradas</div>
+      <div class="mbox-techs">${p.techs.map(t=>`<span class="mbox-tech">${t}</span>`).join('')}</div>
+    </div>
+  </div>`;
+  document.body.appendChild(modal);
+  modal.addEventListener('click', e => { if(e.target === modal) modal.remove(); });
+}
+
+// ── SCROLL REVEAL ──────────────────────────────────────────────────────────
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+}, { threshold: 0.07, rootMargin: '0px 0px -28px 0px' });
+document.querySelectorAll('.rv,.rl,.rr,.rs').forEach(el => obs.observe(el));
+
+// Nav
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('solid', window.scrollY > 60);
+});
+
+// ── MAQUINAS ───────────────────────────────────────────────────────────────
+const MQ = [
+  {id:'a1',cat:'cnc',nom:'Centro de Mecanizado CNC',marca:'TRAVIS',cap:'1500×700×640 mm',cant:1,isNew:false,
+   img:'https://plusermec.com.ar/wp-content/uploads/2025/10/IMG-20251003-WA0195.jpeg',
+   desc:'Centro de mecanizado vertical CNC de alta precisión. Múltiples operaciones en una sola sujeción.',
+   specs:[{l:'Mesa X',v:'1500 mm'},{l:'Mesa Y',v:'700 mm'},{l:'Mesa Z',v:'640 mm'},{l:'Cant.',v:'1'}]},
+  {id:'a2',cat:'cnc',nom:'Torno CNC',marca:'TURRI',cap:'Ø500×750 mm',cant:1,isNew:false,
+   img:'https://plusermec.com.ar/wp-content/uploads/2025/10/20251003_155855-COLLAGE.jpeg',
+   desc:'Torno CNC de precisión para piezas de mediano porte. Roscas especiales y acabados de alta calidad.',
+   specs:[{l:'Diámetro',v:'Ø500 mm'},{l:'Entre puntas',v:'750 mm'},{l:'Control',v:'CNC'},{l:'Cant.',v:'1'}]},
+  {id:'a3',cat:'cnc',nom:'Torno CNC',marca:'PPL',cap:'Ø600×3000 mm',cant:1,isNew:false,
+   img:'https://plusermec.com.ar/wp-content/uploads/2025/10/IMG-20251003-WA0195.jpeg',
+   desc:'Torno CNC de gran longitud para ejes y piezas tubulares hasta 3 metros.',
+   specs:[{l:'Diámetro',v:'Ø600 mm'},{l:'Entre puntas',v:'3000 mm'},{l:'Control',v:'CNC'},{l:'Cant.',v:'1'}]},
+  {id:'a4',cat:'cnc',nom:'Torno CNC',marca:'TRAUB',cap:'Ø600×1000 mm',cant:1,isNew:false,
+   img:'https://plusermec.com.ar/wp-content/uploads/2025/10/20251003_155855-COLLAGE.jpeg',
+   desc:'Torno CNC TRAUB de alta velocidad para series de complejidad media-alta.',
+   specs:[{l:'Diámetro',v:'Ø600 mm'},{l:'Entre puntas',v:'1000 mm'},{l:'Control',v:'CNC'},{l:'Cant.',v:'1'}]},
+  {id:'a5',cat:'torno',nom:'Torno Paralelo',marca:'POREBA',cap:'Ø2000×3000 mm',cant:1,isNew:false,
+   img:'https://plusermec.com.ar/wp-content/uploads/2025/07/IMG-20250725-WA0121-768x576.jpeg',
+   desc:'El torno de mayor capacidad del taller. Ø2000mm de volteo para coronas, anillos y rodillos de gran envergadura.',
+   specs:[{l:'Volteo',v:'Ø2000 mm'},{l:'Entre puntas',v:'3000 mm'},{l:'Tipo',v:'Paralelo'},{l:'Cant.',v:'1'}]},
+  {id:'a6',cat:'torno',nom:'Torno Paralelo',marca:'TRAVIS',cap:'Ø1000×4000 mm',cant:1,isNew:false,
+   img:'https://plusermec.com.ar/wp-content/uploads/2025/07/IMG-20250725-WA0121-768x576.jpeg',
+   desc:'4000mm entre puntas para ejes largos de gran envergadura en industria pesada.',
+   specs:[{l:'Volteo',v:'Ø1000 mm'},{l:'Entre puntas',v:'4000 mm'},{l:'Tipo',v:'Paralelo'},{l:'Cant.',v:'1'}]},
+  {id:'a7',cat:'torno',nom:'Torno Paralelo',marca:'BAOJI',cap:'Ø680×3000 mm',cant:3,isNew:false,
+   img:'https://plusermec.com.ar/wp-content/uploads/2025/10/IMG-20250725-WA0229-1024x768.jpeg',
+   desc:'Serie de 3 tornos para producción paralela. Ø680mm y 3000mm entre puntas.',
+   specs:[{l:'Volteo',v:'Ø680 mm'},{l:'Entre puntas',v:'3000 mm'},{l:'Tipo',v:'Paralelo'},{l:'Cant.',v:'3'}]},
+  {id:'a8',cat:'torno',nom:'Torno Paralelo',marca:'WING',cap:'Ø500×2000 mm',cant:3,isNew:false,
+   img:'https://plusermec.com.ar/wp-content/uploads/2025/10/IMG-20250725-WA0229-1024x768.jpeg',
+   desc:'Tres tornos para trabajo en serie. Versátiles para piezas de mediano porte.',
+   specs:[{l:'Volteo',v:'Ø500 mm'},{l:'Entre puntas',v:'2000 mm'},{l:'Tipo',v:'Paralelo'},{l:'Cant.',v:'3'}]},
+  {id:'a9',cat:'ales',nom:'Alesadora de gran porte',marca:'PBR',cap:'Ø100 · 1800×1500 mm',cant:1,isNew:false,
+   img:'https://plusermec.com.ar/wp-content/uploads/2025/10/tromel-1024x684.png',
+   desc:'Alesadora horizontal con husillo Ø100mm. Clave para tromeles, rodamientos y componentes de gran escala.',
+   specs:[{l:'Husillo',v:'Ø100 mm'},{l:'Mesa X',v:'1800 mm'},{l:'Mesa Y',v:'1500 mm'},{l:'Cant.',v:'1'}]},
+  {id:'a10',cat:'ales',nom:'Alesadora',marca:'FERODA',cap:'Ø55 · 500×1500 mm',cant:2,isNew:false,
+   img:'https://plusermec.com.ar/wp-content/uploads/2025/10/tromel-1024x684.png',
+   desc:'Dos alesadoras de mediano porte con husillo Ø55mm para agujeros de precisión.',
+   specs:[{l:'Husillo',v:'Ø55 mm'},{l:'Mesa X',v:'500 mm'},{l:'Mesa Y',v:'1500 mm'},{l:'Cant.',v:'2'}]},
+  {id:'a_new',cat:'ales',nom:'Alesadora de gran porte',marca:'Nueva incorporación',cap:'Gran escala',cant:1,isNew:true,
+   img:null,
+   desc:'Nueva alesadora que amplía significativamente la capacidad de mecanizado. Habilita proyectos de minería, oil & gas e industria pesada que requieren diámetros excepcionales.',
+   specs:[{l:'Husillo',v:'Gran Ø'},{l:'Precisión',v:'Alta'},{l:'Control',v:'CNC'},{l:'Cant.',v:'1'}]},
+  {id:'a11',cat:'fres',nom:'Fresadora Universal N°3',marca:'SCHEIFER',cap:'800×400 mm',cant:2,isNew:false,
+   img:'https://plusermec.com.ar/wp-content/uploads/2025/10/IMG-20250725-WA0229-1024x768.jpeg',
+   desc:'Fresadoras de alta capacidad para fresado frontal, perfil y ranurado.',
+   specs:[{l:'Mesa X',v:'800 mm'},{l:'Mesa Y',v:'400 mm'},{l:'Tipo',v:'Universal'},{l:'Cant.',v:'2'}]},
+  {id:'a12',cat:'fres',nom:'Fresadora Universal N°2',marca:'IMEPLA',cap:'600×300 mm',cant:4,isNew:false,
+   img:'https://plusermec.com.ar/wp-content/uploads/2025/10/IMG-20250725-WA0229-1024x768.jpeg',
+   desc:'Cuatro fresadoras para producción en serie. Versatilidad para múltiples operaciones.',
+   specs:[{l:'Mesa X',v:'600 mm'},{l:'Mesa Y',v:'300 mm'},{l:'Tipo',v:'Universal'},{l:'Cant.',v:'4'}]},
+  {id:'a13',cat:'otros',nom:'Creadora de Engranajes',marca:'JORPEC',cap:'M-6',cant:3,isNew:false,
+   img:'https://plusermec.com.ar/wp-content/uploads/2025/10/matriz-1024x679.png',
+   desc:'Para fabricación de engranajes rectos y helicoidales de transmisiones industriales.',
+   specs:[{l:'Módulo',v:'M-6'},{l:'Tipo',v:'Creadora'},{l:'Engranajes',v:'Rectos/helicoidales'},{l:'Cant.',v:'3'}]},
+  {id:'a14',cat:'otros',nom:'Rectificadora Plana',marca:'RUF',cap:'600 mm',cant:1,isNew:false,
+   img:'https://plusermec.com.ar/wp-content/uploads/2025/10/valvula-1024x784.png',
+   desc:'Para acabados superficiales de alta precisión y planitud perfecta.',
+   specs:[{l:'Capacidad',v:'600 mm'},{l:'Tipo',v:'Plana'},{l:'Uso',v:'Acabado'},{l:'Cant.',v:'1'}]},
+  {id:'a15',cat:'otros',nom:'Prensa Hidráulica',marca:'—',cap:'100 Toneladas',cant:2,isNew:false,
+   img:'https://plusermec.com.ar/wp-content/uploads/2025/10/IMG-20250725-WA0015.jpeg',
+   desc:'Para desmontaje y montaje de rodamientos, ajustes a presión y enderezado de ejes.',
+   specs:[{l:'Fuerza',v:'100 T'},{l:'Tipo',v:'Hidráulica'},{l:'Uso',v:'Montaje/desmontaje'},{l:'Cant.',v:'2'}]},
+  {id:'a16',cat:'otros',nom:'Soldadora TIG',marca:'MERLE',cap:'500 amp',cant:1,isNew:false,
+   img:'https://plusermec.com.ar/wp-content/uploads/2025/10/IMG_20200301_115607117-1024x576.jpeg',
+   desc:'Soldadura especial: inoxidable, aluminio y materiales especiales con control del arco.',
+   specs:[{l:'Potencia',v:'500 amp'},{l:'Tipo',v:'TIG'},{l:'Materiales',v:'Inox/Al'},{l:'Cant.',v:'1'}]},
+  {id:'a17',cat:'otros',nom:'Soldadora MIG/MAG',marca:'MERLE',cap:'500 amp',cant:2,isNew:false,
+   img:'https://plusermec.com.ar/wp-content/uploads/2025/10/IMG_20210510_130438739-1024x484.jpeg',
+   desc:'Para trabajo estructural y gran caudal en proyectos de gran envergadura.',
+   specs:[{l:'Potencia',v:'500 amp'},{l:'Tipo',v:'MIG/MAG'},{l:'Uso',v:'Estructural'},{l:'Cant.',v:'2'}]},
+];
+
+const CAT_SVG = {
+  cnc:`<svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`,
+  torno:`<svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4"/></svg>`,
+  ales:`<svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+  fres:`<svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
+  otros:`<svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>`,
+};
+const CAT_L={cnc:'CNC',torno:'Torno',ales:'Alesadora',fres:'Fresadora',otros:'Equipamiento'};
+
+function renderList(cat){
+  const list=document.getElementById('maqList');
+  const items=cat==='all'?MQ:MQ.filter(m=>m.cat===cat);
+  list.innerHTML=items.map(m=>`
+    <div class="mi${m.isNew?' active':''}" data-mid="${m.id}" onclick="showMaq('${m.id}')">
+      <div class="mi-ico">${CAT_SVG[m.cat]}</div>
+      <div>
+        <div class="mi-top">
+          <div class="mi-name">${m.nom}</div>
+          ${m.isNew?'<span class="mi-new">Nueva</span>':''}
+        </div>
+        <div class="mi-spec">${m.cap} · ${m.marca}</div>
+        <div class="mi-qty">×${m.cant}</div>
+      </div>
+    </div>`).join('');
+  // Auto-open new machine if present
+  if(cat==='all'||cat==='ales'){
+    const newMaq=MQ.find(m=>m.isNew);
+    if(newMaq) setTimeout(()=>showMaq(newMaq.id),100);
+  }
+}
+
+function showMaq(id){
+  const m=MQ.find(x=>x.id===id);
+  document.querySelectorAll('.mi').forEach(el=>el.classList.toggle('active',el.dataset.mid===id));
+  const det=document.getElementById('maqDet');
+  const imgHtml=m.img
+    ?`<img class="mdi-img" src="${m.img}" alt="${m.nom}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+    :``;
+  det.innerHTML=`<div class="mdi">
+    <div>
+      ${imgHtml}
+      <div class="mdi-img-ph" style="${m.img?'display:none':'display:flex'}">${CAT_SVG[m.cat]}</div>
+      <div class="mdi-sg">${m.specs.map(s=>`<div class="mds"><div class="mds-l">${s.l}</div><div class="mds-v">${s.v}</div></div>`).join('')}</div>
+    </div>
+    <div class="mdi-r">
+      <div class="mdi-cat">${CAT_L[m.cat]}${m.isNew?'<span class="mdi-new-badge">Nueva</span>':''}</div>
+      <div class="mdi-name">${m.nom}</div>
+      <div class="mdi-marca">${m.marca}</div>
+      <p class="mdi-desc">${m.desc}</p>
+    </div>
+  </div>`;
+}
+
+renderList('all');
+document.querySelectorAll('.mcb').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.mcb').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderList(btn.dataset.cat);
+  });
+});
+
+// ── SERVICIOS ──────────────────────────────────────────────────────────────
+let ap=null;
+document.querySelectorAll('.svc-row').forEach(r=>{
+  r.addEventListener('click',()=>{
+    const id='sp-'+r.dataset.s,panel=document.getElementById(id);
+    if(ap&&ap!==panel){ap.classList.remove('open');document.querySelectorAll('.svc-row').forEach(x=>x.classList.remove('active'));}
+    if(panel.classList.contains('open')){panel.classList.remove('open');r.classList.remove('active');ap=null;}
+    else{panel.classList.add('open');r.classList.add('active');ap=panel;setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'nearest'}),50);}
+  });
+});
+
+// ── NAV ────────────────────────────────────────────────────────────────────
+const ham=document.getElementById('ham'),mob=document.getElementById('mob');
+ham.addEventListener('click',()=>{ham.classList.toggle('o');mob.classList.toggle('o');});
+mob.querySelectorAll('.ml').forEach(a=>a.addEventListener('click',()=>{mob.classList.remove('o');ham.classList.remove('o');}));
+
+// ── VIDEOS ─────────────────────────────────────────────────────────────────
+function openVideo(id){document.getElementById('vframe').src=`https://www.youtube.com/embed/${id}?autoplay=1`;document.getElementById('vbox').classList.add('open');}
+function closeVideo(){document.getElementById('vframe').src='';document.getElementById('vbox').classList.remove('open');}
+document.getElementById('vbox').addEventListener('click',e=>{if(e.target===document.getElementById('vbox'))closeVideo();});
+
+// ── FORM ───────────────────────────────────────────────────────────────────
+document.getElementById('fsub').addEventListener('click',()=>{
+  document.getElementById('fsub').style.display='none';
+  document.getElementById('fok').style.display='block';
+});
+
+// ── SMOOTH SCROLL ──────────────────────────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}});
+});
+
+// ── INIT ───────────────────────────────────────────────────────────────────
+renderProyectos();
+
+// ── LANG ───────────────────────────────────────────────────────────────────
+const T={
+  es:{nav_q:"Quiénes somos",nav_s:"Servicios",nav_m:"Maquinaria",nav_p:"Proyectos",nav_c:"Contacto",cta:"Consultar",
+      hero_tag:"Industria Metalúrgica · Desde 1976",
+      hero_h1:"Precisión industrial<br>para los proyectos<br>más <em>exigentes</em>",
+      hero_p:"50 años fabricando, reparando y mecanizando con el rigor técnico que la industria demanda.",
+      hero_b1:"Ver proyectos",hero_b2:"Nuestra maquinaria",
+      st1:"Fundación",st2:"Años de trayectoria",st3:"Máquinas en taller",
+      q_kick:"Quiénes somos",q_ttl:"Experiencia que<br>se mide en décadas",
+      q_p1:"Fundada en 1976 en Remedios de Escalada, Plusermec S.A. no es solo un taller: es una empresa con <strong>casi 50 años de saber técnico acumulado</strong>. Cada pieza que sale de nuestro taller carga esa historia.",
+      q_p2:"Trabajamos con la industria más exigente del país. Minería, oil & gas, naval, siderúrgica. Clientes que no toleran errores y que eligen Plusermec porque saben que <strong>el trabajo va a quedar bien, en tiempo y a escala</strong>.",
+      q_p3:"Tenemos la capacidad de asesorar, relevar y resolver piezas en cualquier punto del país. No hacemos solo lo que entra en el torno — adaptamos el equipamiento al problema.",
+      qp1t:"Precisión",qp1d:"Tolerancias estrictas en cada trabajo",
+      qp2t:"Calidad",qp2d:"50 años de estándares comprobados",
+      qp3t:"Respuesta",qp3d:"Capacidad para proyectos urgentes",
+      in1:"Minería",in2:"Oil & Gas",in3:"Naval",in4:"Siderúrgica",in5:"Papelera",in6:"Química",in7:"Construcción",in8:"Textil",
+      id1:"Tromeles, cintas, estructuras",id2:"Bombeo, válvulas, bridas",id3:"Ejes, hélices, propulsión",
+      id4:"Rodillos, ejes, engranajes",id5:"Rodillos, ejes, bombas",id6:"Agitadores, intercambiadores",id7:"Estructuras, plataformas",id8:"Rodillos, piezas de precisión",
+      s_kick:"Capacidades técnicas",s_ttl:"Lo que hacemos",s_sub:"Clic en cada capacidad para ver más detalle.",
+      s1n:"Mecanizado de precisión",s2n:"Fabricación de repuestos",s3n:"Reparación y mantenimiento",s4n:"Diseño y fabricación a medida",s5n:"Soldaduras especiales",
+      sd1p:"Centro CNC Travis (1500×700×640mm), tornos CNC Turri / PPL / Traub, tornos paralelos hasta Ø2000×3000mm.",
+      sd2p:"Fabricación sobre planos o muestras. Engranajes rectos y helicoidales. Micromecanizados CNC.",
+      sd3p:"Cilindros hidráulicos, tromeles de 3m, ejes de 4m. Mantenimiento preventivo y correctivo con desplazamiento a planta.",
+      sd4p:"Cintas transportadoras, silos, bombas, intercambiadores. Desde CAD hasta puesta en marcha.",
+      sd5p:"Hardox, inoxidables, aluminio y alta aleación. Soldadoras TIG y MIG Merle 500amp.",
+      m_kick:"Parque técnico",m_ttl:"Nuestra maquinaria",m_sub:"Seleccioná una máquina para ver sus especificaciones técnicas.",
+      ml_t:"Equipamiento",ml_s:"20 máquinas",cat_all:"Todas",cat_cnc:"CNC",cat_tor:"Tornos",cat_ale:"Alesadoras",cat_fre:"Fresadoras",cat_otr:"Otros",
+      maq_sel:"Seleccioná una máquina",
+      p_kick:"Portfolio",p_ttl:"Proyectos realizados",p_sub:"Trabajos ejecutados para clientes de distintos sectores. Clic para ver detalle.",
+      techs_lbl:"Tecnologías involucradas",
+      c_kick:"Hablemos",c_ttl:"Contacto",c_dir:"Dirección",c_tel:"Teléfono",
+      f_kick:"Formulario",fo1:"Seleccioná un servicio",f_btn:"Enviar consulta",f_ok:"✓ Consulta enviada. Nos ponemos en contacto a la brevedad.",cp_r:"Contacto"},
+  en:{nav_q:"About us",nav_s:"Services",nav_m:"Machinery",nav_p:"Projects",nav_c:"Contact",cta:"Inquire",
+      hero_tag:"Metalworking Industry · Since 1976",
+      hero_h1:"Industrial precision<br>for the most<br><em>demanding</em> projects",
+      hero_p:"50 years of manufacturing, repair and machining with the technical rigor that industry demands.",
+      hero_b1:"View projects",hero_b2:"Our machinery",
+      st1:"Founded",st2:"Years of experience",st3:"Machines on-site",
+      q_kick:"About us",q_ttl:"Experience measured<br>in decades",
+      q_p1:"Founded in 1976, Plusermec S.A. is not just a workshop — it's a company with <strong>nearly 50 years of accumulated technical knowledge</strong>.",
+      q_p2:"We work with the most demanding industries: mining, oil & gas, naval, steel. Clients who choose Plusermec because they know <strong>the job will be done right, on time and at scale</strong>.",
+      q_p3:"We can advise, survey and resolve parts anywhere in the country. We don't just do what fits in the lathe — we adapt the equipment to the problem.",
+      qp1t:"Precision",qp1d:"Strict tolerances in every job",
+      qp2t:"Quality",qp2d:"50 years of proven standards",
+      qp3t:"Response",qp3d:"Capacity for urgent projects",
+      in1:"Mining",in2:"Oil & Gas",in3:"Naval",in4:"Steel",in5:"Paper",in6:"Chemical",in7:"Construction",in8:"Textile",
+      id1:"Drums, conveyors, structures",id2:"Pumping, valves, flanges",id3:"Shafts, propellers, propulsion",
+      id4:"Rollers, shafts, gears",id5:"Drying rollers, shafts",id6:"Agitators, heat exchangers",id7:"Structures, platforms",id8:"Rollers, precision parts",
+      s_kick:"Technical capabilities",s_ttl:"What we do",s_sub:"Click each capability to see more detail.",
+      s1n:"Precision machining",s2n:"Spare parts manufacturing",s3n:"Repair & maintenance",s4n:"Custom design & fabrication",s5n:"Special welding",
+      sd1p:"Travis CNC center (1500×700×640mm), CNC lathes Turri / PPL / Traub, parallel lathes up to Ø2000×3000mm.",
+      sd2p:"Manufacturing from drawings or samples. Spur and helical gears. CNC micro-machining.",
+      sd3p:"Hydraulic cylinders, 3m drums, 4m shafts. Preventive and corrective maintenance with on-site deployment.",
+      sd4p:"Conveyors, silos, pumps, heat exchangers. From CAD design to plant commissioning.",
+      sd5p:"Hardox, stainless steel, aluminum and high alloy. TIG and MIG Merle 500amp welders.",
+      m_kick:"Technical fleet",m_ttl:"Our machinery",m_sub:"Select a machine to see its full technical specifications.",
+      ml_t:"Equipment",ml_s:"20 machines",cat_all:"All",cat_cnc:"CNC",cat_tor:"Lathes",cat_ale:"Boring",cat_fre:"Milling",cat_otr:"Other",
+      maq_sel:"Select a machine",
+      p_kick:"Portfolio",p_ttl:"Completed projects",p_sub:"Work executed for clients across different industrial sectors.",
+      techs_lbl:"Technologies involved",
+      c_kick:"Let's talk",c_ttl:"Contact",c_dir:"Address",c_tel:"Phone",
+      f_kick:"Contact form",fo1:"Select a service",f_btn:"Send inquiry",f_ok:"✓ Inquiry sent. We'll contact you shortly.",cp_r:"Contact"},
+  pt:{nav_q:"Quem somos",nav_s:"Serviços",nav_m:"Maquinário",nav_p:"Projetos",nav_c:"Contato",cta:"Consultar",
+      hero_tag:"Indústria Metalúrgica · Desde 1976",
+      hero_h1:"Precisão industrial<br>para os projetos<br>mais <em>exigentes</em>",
+      hero_p:"50 anos fabricando, reparando e usinando com o rigor técnico que a indústria exige.",
+      hero_b1:"Ver projetos",hero_b2:"Nosso maquinário",
+      st1:"Fundação",st2:"Anos de experiência",st3:"Máquinas no taller",
+      q_kick:"Quem somos",q_ttl:"Experiência que<br>se mede em décadas",
+      q_p1:"Fundada em 1976, Plusermec S.A. não é só uma oficina — é uma empresa com <strong>quase 50 anos de conhecimento técnico acumulado</strong>.",
+      q_p2:"Trabalhamos com a indústria mais exigente: mineração, oil & gas, naval, siderúrgica. Clientes que escolhem Plusermec porque sabem que <strong>o trabalho vai ficar certo, no prazo e na escala</strong>.",
+      q_p3:"Temos capacidade de assessorar, levantar e resolver peças em qualquer ponto do país.",
+      qp1t:"Precisão",qp1d:"Tolerâncias estritas em cada trabalho",
+      qp2t:"Qualidade",qp2d:"50 anos de padrões comprovados",
+      qp3t:"Resposta",qp3d:"Capacidade para projetos urgentes",
+      in1:"Mineração",in2:"Oil & Gas",in3:"Naval",in4:"Siderúrgica",in5:"Papel",in6:"Química",in7:"Construção",in8:"Têxtil",
+      id1:"Tromeles, correias, estruturas",id2:"Bombeamento, válvulas",id3:"Eixos, hélices, propulsão",
+      id4:"Rolos, eixos, engrenagens",id5:"Rolos secadores, eixos",id6:"Agitadores, trocadores",id7:"Estruturas, plataformas",id8:"Rolos, peças de precisão",
+      s_kick:"Capacidades técnicas",s_ttl:"O que fazemos",s_sub:"Clique em cada capacidade para ver mais detalhes.",
+      s1n:"Usinagem de precisão",s2n:"Fabricação de peças",s3n:"Reparação e manutenção",s4n:"Projeto e fabricação sob medida",s5n:"Soldagem especial",
+      sd1p:"Centro CNC Travis, tornos CNC Turri / PPL / Traub, tornos paralelos até Ø2000×3000mm.",
+      sd2p:"Fabricação sobre desenhos ou amostras. Engrenagens retas e helicoidais. Microusinagem CNC.",
+      sd3p:"Cilindros hidráulicos, tromeles de 3m, eixos de 4m. Manutenção preventiva e corretiva com deslocamento.",
+      sd4p:"Correias, silos, bombas, trocadores. Do projeto CAD até a operação em planta.",
+      sd5p:"Hardox, inox, alumínio e alta liga. Soldadoras TIG e MIG Merle 500amp.",
+      m_kick:"Parque técnico",m_ttl:"Nosso maquinário",m_sub:"Selecione uma máquina para ver as especificações técnicas.",
+      ml_t:"Equipamento",ml_s:"20 máquinas",cat_all:"Todas",cat_cnc:"CNC",cat_tor:"Tornos",cat_ale:"Mandriladoras",cat_fre:"Fresadoras",cat_otr:"Outros",
+      maq_sel:"Selecione uma máquina",
+      p_kick:"Portfólio",p_ttl:"Projetos realizados",p_sub:"Trabalhos executados para clientes de diferentes setores.",
+      techs_lbl:"Tecnologias envolvidas",
+      c_kick:"Fale conosco",c_ttl:"Contato",c_dir:"Endereço",c_tel:"Telefone",
+      f_kick:"Formulário",fo1:"Selecione um serviço",f_btn:"Enviar consulta",f_ok:"✓ Consulta enviada. Entraremos em contato.",cp_r:"Contato"}
+};
+function setLang(l){
+  document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('active',b.textContent===l.toUpperCase()));
+  const t=T[l];
+  document.querySelectorAll('[data-i]').forEach(el=>{const k=el.dataset.i;if(t[k]!==undefined)el.innerHTML=t[k];});
+  document.querySelectorAll('[data-ph]').forEach(el=>{const k=el.dataset.ph;if(t[k])el.placeholder=t[k];});
+}
+</script>
+</body>
+</html>
