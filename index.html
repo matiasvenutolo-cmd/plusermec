@@ -7,6 +7,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
+
+/* ── SPLASH ── */
+#splash{position:fixed;inset:0;z-index:9999;background:var(--az);display:flex;align-items:center;justify-content:center;transition:opacity 1s cubic-bezier(.4,0,.2,1)}
+#splash.fade-out{opacity:0;pointer-events:none}
+#splash.gone{display:none}
+.sp-logo{width:min(360px,65vw);opacity:0;transform:translateY(18px) scale(.97);transition:opacity 1s cubic-bezier(.22,1,.36,1),transform 1s cubic-bezier(.22,1,.36,1)}
+.sp-logo.in{opacity:1;transform:translateY(0) scale(1)}
+.sp-logo.out{opacity:0;transform:translateY(-8px) scale(1.03);transition:opacity .7s ease,transform .7s ease}
 :root{
   --az:#0C2340;--azm:#1A3F6F;--azl:#2563A8;
   --cel:#4A9EC4;--celf:#E8F4FB;
@@ -325,6 +333,11 @@ textarea{resize:none;height:90px;margin-bottom:9px}
 </head>
 <body>
 
+<!-- SPLASH -->
+<div id="splash">
+  <img class="sp-logo" id="sp-logo" src="logo-splash.png" alt="Plusermec S.A.">
+</div>
+
 <!-- NAV -->
 <nav class="nav" id="nav">
   <a href="#" class="logo">
@@ -563,6 +576,20 @@ textarea{resize:none;height:90px;margin-bottom:9px}
 </footer>
 
 <script>
+// ── SPLASH ──────────────────────────────────────────────────────────────────
+(()=>{
+  const splash = document.getElementById('splash');
+  const logo   = document.getElementById('sp-logo');
+  // 1. Logo sube suavemente y aparece
+  requestAnimationFrame(()=>{ setTimeout(()=>logo.classList.add('in'), 80); });
+  // 2. Logo se eleva y desvanece
+  setTimeout(()=>logo.classList.add('out'), 1800);
+  // 3. Overlay fade out
+  setTimeout(()=>splash.classList.add('fade-out'), 2200);
+  // 4. Eliminar del DOM
+  setTimeout(()=>splash.classList.add('gone'), 3300);
+})();
+
 // ── SECTOR COLORS ──────────────────────────────────────────────────────────
 const SECTOR_COLORS = {
   'Oil & Gas':    {bg:'rgba(217,119,6,.12)',  color:'#b45309',  border:'rgba(217,119,6,.25)'},
