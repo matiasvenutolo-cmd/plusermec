@@ -45,13 +45,9 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--fondo);color:va
 /* ── NAV ── */
 .nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 56px;height:64px;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
 .nav.solid{background:rgba(12,35,64,.96);backdrop-filter:blur(16px)}
-.logo{text-decoration:none;display:flex;align-items:center;gap:12px}
-.logo-mark{width:32px;height:32px;border:2px solid rgba(255,255,255,.7);border-radius:6px;display:flex;align-items:center;justify-content:center;transition:border-color .3s}
-.logo-mark svg{width:16px;height:16px;fill:none;stroke:rgba(255,255,255,.85);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.nav.solid .logo-mark{border-color:var(--cel)}
-.logo-txt{display:flex;flex-direction:column}
-.logo-m{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#fff;letter-spacing:.5px;line-height:1}
-.logo-s{font-size:9px;color:rgba(255,255,255,.45);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.logo{text-decoration:none;display:flex;align-items:center;transition:opacity .25s}
+.logo:hover{opacity:.8}
+.logo-img{height:36px;width:auto;display:block}
 .nl{display:flex;gap:2px;list-style:none}
 .nl a{color:rgba(255,255,255,.65);text-decoration:none;font-size:12px;font-weight:400;padding:6px 14px;border-radius:5px;transition:all .2s;letter-spacing:.2px}
 .nl a:hover{color:#fff;background:rgba(255,255,255,.08)}
@@ -287,9 +283,9 @@ textarea{resize:none;height:90px;margin-bottom:9px}
 
 /* ── FOOTER ── */
 .footer{background:var(--az);padding:36px 60px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
-.fl{text-decoration:none}
-.fl-m{font-family:'Space Grotesk',sans-serif;font-size:18px;color:#fff;font-style:italic}
-.fl-s{font-size:8px;color:rgba(255,255,255,.35);letter-spacing:2px;text-transform:uppercase;margin-top:2px;display:block}
+.fl{text-decoration:none;display:block;opacity:.75;transition:opacity .2s}
+.fl:hover{opacity:1}
+.fl-img{height:28px;width:auto;display:block}
 .flinks{display:flex;gap:16px}
 .flinks a{font-size:11px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s}
 .flinks a:hover{color:#fff}
@@ -301,6 +297,7 @@ textarea{resize:none;height:90px;margin-bottom:9px}
 @media(max-width:960px){
   .nav{padding:0 20px}
   .nl,.nav-cta{display:none}.ham{display:flex}
+  .logo-img{height:30px}
   .hero h1{font-size:48px}
   .hero-content{padding:0 24px 60px}
   .hero-scroll{display:none}
@@ -331,8 +328,7 @@ textarea{resize:none;height:90px;margin-bottom:9px}
 <!-- NAV -->
 <nav class="nav" id="nav">
   <a href="#" class="logo">
-    <div class="logo-mark"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-    <div class="logo-txt"><span class="logo-m">PLUSERMEC S.A.</span><span class="logo-s">Industria Metalúrgica</span></div>
+    <img class="logo-img" src="logo.png" alt="Plusermec S.A. — Industria Metalúrgica">
   </a>
   <ul class="nl">
     <li><a href="#quienes" data-i="nav_q">Quiénes somos</a></li>
@@ -557,7 +553,7 @@ textarea{resize:none;height:90px;margin-bottom:9px}
 <div class="vbox" id="vbox"><div class="vbi"><button class="vbc" onclick="closeVideo()">✕</button><iframe class="vbf" id="vframe" src="" allowfullscreen></iframe></div></div>
 
 <footer class="footer">
-  <a href="#" class="fl"><span class="fl-m">Plusermec S.A.</span><span class="fl-s">Industria Metalúrgica · Desde 1976</span></a>
+  <a href="#" class="fl"><img class="fl-img" src="logo.png" alt="Plusermec S.A."></a>
   <div class="flinks">
     <a href="#quienes" data-i="nav_q">Quiénes somos</a><a href="#servicios" data-i="nav_s">Servicios</a>
     <a href="#maquinaria" data-i="nav_m">Maquinaria</a><a href="#proyectos" data-i="nav_p">Proyectos</a>
