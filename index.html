@@ -8,6 +8,7 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 
+/* ED:START */
 /* ── EDITOR (solo con ?edit en la URL) ── */
 #ed-bar{display:none;position:fixed;top:0;left:0;right:0;z-index:99999;height:52px;
   background:#13161f;border-bottom:1px solid rgba(255,255,255,.1);
@@ -40,6 +41,7 @@ body.ed-open{padding-top:52px}
   border:1px solid rgba(255,255,255,.1);opacity:0;transition:all .3s;
   pointer-events:none;white-space:nowrap;z-index:99999;font-family:system-ui,sans-serif}
 #ed-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+/* ED:END */
 
 /* ── SPLASH ── */
 #splash{position:fixed;inset:0;z-index:9999;background:var(--az);display:flex;align-items:center;justify-content:center;transition:opacity 1s cubic-bezier(.4,0,.2,1)}
@@ -367,6 +369,7 @@ textarea{resize:none;height:90px;margin-bottom:9px}
 <body>
 
 <!-- EDITOR BAR -->
+<!-- ED:START -->
 <div id="ed-bar">
   <span class="ed-brand">PLUSERMEC</span>
   <span class="ed-badge">EDITOR</span>
@@ -376,6 +379,7 @@ textarea{resize:none;height:90px;margin-bottom:9px}
   <button class="ed-btn ed-btn-save" onclick="edSave()">💾 Guardar HTML</button>
 </div>
 <div id="ed-toast"></div>
+<!-- ED:END -->
 
 <!-- SPLASH -->
 <div id="splash">
@@ -1056,6 +1060,7 @@ function setLang(l){
   document.querySelectorAll('[data-ph]').forEach(el=>{const k=el.dataset.ph;if(t[k])el.placeholder=t[k];});
 }
 
+// ED:START
 // ── EDITOR ──────────────────────────────────────────────────────────────────
 (()=>{
   if (!location.search.includes('edit')) return;
@@ -1186,8 +1191,12 @@ function setLang(l){
       edToast('❌ Error al leer el archivo');
       return;
     }
+    // Quitar todo el código del editor del output (CSS, HTML y JS)
+    html = html.replace(/\/\* ED:START \*\/[\s\S]*?\/\* ED:END \*\//g, '');
+    html = html.replace(/<!-- ED:START -->[\s\S]*?<!-- ED:END -->/g, '');
+    html = html.replace(/\/\/ ED:START[\s\S]*?\/\/ ED:END/g, '');
     // Quitar overrides previos si existían
-    html = html.replace(/<script>window\._plusOverrides[\s\S]*?<\/script>\n?/, '');
+    html = html.replace(/<script>window\._plusOverrides[\s\S]*?<\/script>\n?/g, '');
 
     // 3. Reemplazar imágenes estáticas cambiadas (orig src → base64)
     for(const [origSrc, newSrc] of Object.entries(_imgChanges)){
@@ -1230,6 +1239,7 @@ function setLang(l){
     _toastTimer = setTimeout(()=>el.classList.remove('show'),3000);
   };
 })();
+// ED:END
 </script>
 </body>
 </html>
