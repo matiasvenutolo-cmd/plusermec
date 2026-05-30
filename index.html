@@ -1194,10 +1194,12 @@ function setLang(l){
       if(origSrc && newSrc) html = html.split(origSrc).join(newSrc);
     }
 
-    // 4. Inyectar overrides de maquinaria (persisten sin editor)
+    // 4. Inyectar overrides de maquinaria usando lastIndexOf para no pisar el JS
     if(Object.keys(_maqChanges).length){
       const ovJSON = JSON.stringify(_maqChanges).replace(/<\//g,'<\\/');
-      html = html.replace('</body>', `<script>window._plusOverrides=${ovJSON};<\/script>\n</body>`);
+      const inj = `<script>window._plusOverrides=${ovJSON};<\/script>\n`;
+      const bi = html.lastIndexOf('</body>');
+      if(bi !== -1) html = html.slice(0, bi) + inj + html.slice(bi);
     }
 
     // 5. Guardar
