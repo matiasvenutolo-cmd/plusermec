@@ -29,10 +29,6 @@
 /* fotos editables */
 body.ed-on img[data-ei]{cursor:pointer;outline:3px dashed rgba(74,158,196,.5);outline-offset:2px;transition:filter .15s,outline .15s}
 body.ed-on img[data-ei]:hover{outline-color:#4A9EC4;filter:brightness(.75)}
-/* textos editables */
-body.ed-on [data-et]{cursor:text;outline:2px dashed rgba(74,158,196,.4);outline-offset:2px;border-radius:2px}
-body.ed-on [data-et]:hover{outline-color:#4A9EC4}
-body.ed-on [data-et]:focus{outline:2px solid #4A9EC4;background:rgba(74,158,196,.06)}
 /* empujar contenido si barra visible */
 body.ed-open{padding-top:52px}
 /* toast */
@@ -1075,16 +1071,6 @@ function setLang(l){
 
   let editing = false;
 
-  const TEXT_SEL = [
-    '.hero h1','.hero-p',
-    '.sec-title','.sttl','.sec-kicker',
-    '.qs-lead p','.q-text p',
-    '.svc-row .svc-name','.sp-grid p',
-    '.mdi-name','.mdi-marca','.mdi-desc',
-    '.proy-nombre','.proy-desc',
-    '.cpers-name','.cpers-role',
-  ].join(',');
-
   const IMG_SKIP = ['logo-img','sp-logo','fl-img'];
 
   // Marcar imagen como editable (guarda el src original para el save)
@@ -1096,19 +1082,8 @@ function setLang(l){
     img.setAttribute('data-ei','');
   }
 
-  // Marcar texto como editable
-  function markTexts(root){
-    (root||document).querySelectorAll(TEXT_SEL).forEach(el=>{
-      if (el.hasAttribute('data-et')) return;
-      el.setAttribute('data-et','');
-      el.setAttribute('contenteditable', editing ? 'true' : 'false');
-      el.setAttribute('spellcheck','false');
-    });
-  }
-
   // Marcar todo al inicio
   document.querySelectorAll('img').forEach(markImg);
-  markTexts();
 
   // Rastrear cambios: imágenes estáticas {origSrc: base64} y maquinaria {id: {img,nom,...}}
   const _imgChanges = {};
@@ -1121,10 +1096,7 @@ function setLang(l){
     _curMaqId = id;
     _origShowMaq(id);
     setTimeout(()=>{
-      const det = document.getElementById('maqDet');
-      det.querySelectorAll('img').forEach(markImg);
-      markTexts(det);
-      if (editing) det.querySelectorAll('[data-et]').forEach(el=>el.setAttribute('contenteditable','true'));
+      document.getElementById('maqDet').querySelectorAll('img').forEach(markImg);
     }, 20);
   };
 
@@ -1159,30 +1131,18 @@ function setLang(l){
   window.edToggle = function(){
     editing = !editing;
     document.body.classList.toggle('ed-on', editing);
-    document.querySelectorAll('[data-et]').forEach(el=>
-      el.setAttribute('contenteditable', editing ? 'true' : 'false')
-    );
     const btn = document.getElementById('ed-toggle');
-    btn.textContent = editing ? '✅ Editando' : '✏️ Activar edición';
+    btn.textContent = editing ? '✅ Editando' : '📷 Activar edición';
     btn.classList.toggle('on', editing);
     document.getElementById('ed-hint').textContent = editing
-      ? '📷 Clic en foto para cambiar · Clic en texto para editar'
-      : 'Activá edición para modificar fotos y textos';
+      ? 'Hacé clic en cualquier foto para reemplazarla'
+      : 'Activá edición para cambiar fotos';
   };
 
   window.edSave = async function(){
     edToast('⏳ Generando archivo…');
 
-    // 1. Capturar textos de maquinaria visible
-    if(_curMaqId){
-      const det=document.getElementById('maqDet');
-      if(!_maqChanges[_curMaqId]) _maqChanges[_curMaqId]={};
-      const nom=det.querySelector('.mdi-name'); if(nom) _maqChanges[_curMaqId].nom=nom.textContent.trim();
-      const marca=det.querySelector('.mdi-marca'); if(marca) _maqChanges[_curMaqId].marca=marca.textContent.trim();
-      const desc=det.querySelector('.mdi-desc'); if(desc) _maqChanges[_curMaqId].desc=desc.textContent.trim();
-    }
-
-    // 2. Fetchear el HTML original limpio desde el servidor
+    // 1. Fetchear el HTML original limpio desde el servidor
     let html;
     try {
       const resp = await fetch(location.pathname);
