@@ -8,36 +8,7 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 
-/* ED:START */
-/* ── EDITOR (solo con ?edit en la URL) ── */
-#ed-bar{display:none;position:fixed;top:0;left:0;right:0;z-index:99999;height:52px;
-  background:#13161f;border-bottom:1px solid rgba(255,255,255,.1);
-  align-items:center;gap:10px;padding:0 16px;font-family:system-ui,sans-serif}
-#ed-bar.visible{display:flex}
-.ed-brand{font-size:12px;font-weight:700;color:#fff;letter-spacing:.5px}
-.ed-badge{font-size:9px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.4);
-  padding:2px 8px;border-radius:20px;letter-spacing:1.5px;text-transform:uppercase}
-.ed-sep{flex:1}
-.ed-hint{font-size:11px;color:rgba(255,255,255,.3)}
-.ed-btn{padding:7px 16px;border-radius:6px;font-size:12px;font-weight:600;
-  cursor:pointer;border:none;transition:all .2s;letter-spacing:.2px}
-.ed-btn-toggle{background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);
-  border:1px solid rgba(255,255,255,.12)}
-.ed-btn-toggle.on{background:rgba(34,197,94,.15);color:#22c55e;border-color:rgba(34,197,94,.4)}
-.ed-btn-save{background:#4A9EC4;color:#fff}
-.ed-btn-save:hover{background:#3a8eb4}
-/* fotos editables */
-body.ed-on img[data-ei]{cursor:pointer;outline:3px dashed rgba(74,158,196,.5);outline-offset:2px;transition:filter .15s,outline .15s}
-body.ed-on img[data-ei]:hover{outline-color:#4A9EC4;filter:brightness(.75)}
-/* empujar contenido si barra visible */
-body.ed-open{padding-top:52px}
-/* toast */
-#ed-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);
-  background:#1e2433;color:#fff;font-size:12px;padding:9px 18px;border-radius:8px;
-  border:1px solid rgba(255,255,255,.1);opacity:0;transition:all .3s;
-  pointer-events:none;white-space:nowrap;z-index:99999;font-family:system-ui,sans-serif}
-#ed-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-/* ED:END */
+
 
 /* ── SPLASH ── */
 #splash{position:fixed;inset:0;z-index:9999;background:var(--az);display:flex;align-items:center;justify-content:center;transition:opacity 1s cubic-bezier(.4,0,.2,1)}
@@ -365,17 +336,7 @@ textarea{resize:none;height:90px;margin-bottom:9px}
 <body>
 
 <!-- EDITOR BAR -->
-<!-- ED:START -->
-<div id="ed-bar">
-  <span class="ed-brand">PLUSERMEC</span>
-  <span class="ed-badge">EDITOR</span>
-  <div class="ed-sep"></div>
-  <span class="ed-hint" id="ed-hint">Activá edición para modificar fotos y textos</span>
-  <button class="ed-btn ed-btn-toggle" id="ed-toggle" onclick="edToggle()">✏️ Activar edición</button>
-  <button class="ed-btn ed-btn-save" onclick="edSave()">💾 Guardar HTML</button>
-</div>
-<div id="ed-toast"></div>
-<!-- ED:END -->
+
 
 <!-- SPLASH -->
 <div id="splash">
@@ -1056,150 +1017,7 @@ function setLang(l){
   document.querySelectorAll('[data-ph]').forEach(el=>{const k=el.dataset.ph;if(t[k])el.placeholder=t[k];});
 }
 
-// ED:START
-// ── EDITOR ──────────────────────────────────────────────────────────────────
-(()=>{
-  if (!location.search.includes('edit')) return;
 
-  // Mostrar barra y empujar contenido
-  document.getElementById('ed-bar').classList.add('visible');
-  document.body.classList.add('ed-open');
-
-  // Deshabilitar splash en modo editor
-  const splash = document.getElementById('splash');
-  if (splash) { splash.classList.add('gone'); splash.style.cssText=''; }
-
-  let editing = false;
-
-  const IMG_SKIP = ['logo-img','sp-logo','fl-img'];
-
-  // Marcar imagen como editable (guarda el src original para el save)
-  function markImg(img){
-    if (img.hasAttribute('data-ei')) return;
-    if (img.closest('#splash')) return;
-    if (IMG_SKIP.some(c=>img.classList.contains(c))) return;
-    img.setAttribute('data-orig-src', img.getAttribute('src') || '');
-    img.setAttribute('data-ei','');
-  }
-
-  // Marcar todo al inicio
-  document.querySelectorAll('img').forEach(markImg);
-
-  // Rastrear cambios: imágenes estáticas {origSrc: base64} y maquinaria {id: {img,nom,...}}
-  const _imgChanges = {};
-  const _maqChanges = window._plusOverrides || {};
-  let _curMaqId = null;
-
-  // Monkey-patch showMaq para capturar contenido dinámico de maquinaria
-  const _origShowMaq = window.showMaq;
-  window.showMaq = function(id){
-    _curMaqId = id;
-    _origShowMaq(id);
-    setTimeout(()=>{
-      document.getElementById('maqDet').querySelectorAll('img').forEach(markImg);
-    }, 20);
-  };
-
-  // Click en foto — event delegation con capture para atrapar antes que otros handlers
-  document.addEventListener('click', function(e){
-    if (!editing) return;
-    const img = e.target.closest('img[data-ei]');
-    if (!img) return;
-    e.preventDefault(); e.stopPropagation();
-    const input = document.createElement('input');
-    input.type='file'; input.accept='image/*';
-    input.onchange = ev=>{
-      const file=ev.target.files[0]; if(!file) return;
-      const reader=new FileReader();
-      reader.onload = r=>{
-        img.src=r.target.result; img.removeAttribute('srcset');
-        // Rastrear cambio
-        if(img.classList.contains('mdi-img') && _curMaqId){
-          if(!_maqChanges[_curMaqId]) _maqChanges[_curMaqId]={};
-          _maqChanges[_curMaqId].img = r.target.result;
-        } else {
-          const origSrc = img.getAttribute('data-orig-src') || '';
-          if(origSrc) _imgChanges[origSrc] = r.target.result;
-        }
-        edToast('✅ Foto actualizada');
-      };
-      reader.readAsDataURL(file);
-    };
-    input.click();
-  }, true);
-
-  window.edToggle = function(){
-    editing = !editing;
-    document.body.classList.toggle('ed-on', editing);
-    const btn = document.getElementById('ed-toggle');
-    btn.textContent = editing ? '✅ Editando' : '📷 Activar edición';
-    btn.classList.toggle('on', editing);
-    document.getElementById('ed-hint').textContent = editing
-      ? 'Hacé clic en cualquier foto para reemplazarla'
-      : 'Activá edición para cambiar fotos';
-  };
-
-  window.edSave = async function(){
-    edToast('⏳ Generando archivo…');
-
-    // 1. Fetchear el HTML original limpio desde el servidor
-    let html;
-    try {
-      const resp = await fetch(location.pathname);
-      html = await resp.text();
-    } catch(e) {
-      edToast('❌ Error al leer el archivo');
-      return;
-    }
-    // Quitar todo el código del editor del output (CSS, HTML y JS)
-    html = html.replace(/\/\* ED:START \*\/[\s\S]*?\/\* ED:END \*\//g, '');
-    html = html.replace(/<!-- ED:START -->[\s\S]*?<!-- ED:END -->/g, '');
-    html = html.replace(/\/\/ ED:START[\s\S]*?\/\/ ED:END/g, '');
-    // Quitar overrides previos si existían
-    html = html.replace(/<script>window\._plusOverrides[\s\S]*?<\/script>\n?/g, '');
-
-    // 3. Reemplazar imágenes estáticas cambiadas (orig src → base64)
-    for(const [origSrc, newSrc] of Object.entries(_imgChanges)){
-      if(origSrc && newSrc) html = html.split(origSrc).join(newSrc);
-    }
-
-    // 4. Inyectar overrides de maquinaria usando lastIndexOf para no pisar el JS
-    if(Object.keys(_maqChanges).length){
-      const ovJSON = JSON.stringify(_maqChanges).replace(/<\//g,'<\\/');
-      const inj = `<script>window._plusOverrides=${ovJSON};<\/script>\n`;
-      const bi = html.lastIndexOf('</body>');
-      if(bi !== -1) html = html.slice(0, bi) + inj + html.slice(bi);
-    }
-
-    // 5. Guardar
-    if('showSaveFilePicker' in window){
-      try{
-        const fh = await window.showSaveFilePicker({
-          suggestedName:'index.html',
-          types:[{description:'HTML',accept:{'text/html':['.html']}}]
-        });
-        const w = await fh.createWritable();
-        await w.write(html); await w.close();
-        edToast('✅ Guardado directamente en el archivo');
-        return;
-      }catch(e){ if(e.name==='AbortError') return; }
-    }
-    const blob=new Blob([html],{type:'text/html;charset=utf-8'});
-    const a=document.createElement('a');
-    a.href=URL.createObjectURL(blob); a.download='index.html'; a.click();
-    setTimeout(()=>URL.revokeObjectURL(a.href),5000);
-    edToast('✅ Descargado — reemplazá el index.html en la carpeta con este archivo');
-  };
-
-  let _toastTimer;
-  window.edToast = function(msg){
-    const el = document.getElementById('ed-toast');
-    el.textContent = msg; el.classList.add('show');
-    clearTimeout(_toastTimer);
-    _toastTimer = setTimeout(()=>el.classList.remove('show'),3000);
-  };
-})();
-// ED:END
 </script>
 </body>
 </html>
