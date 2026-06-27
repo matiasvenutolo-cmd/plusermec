@@ -89,7 +89,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--fondo);color:va
 .hero-tag-dot{width:6px;height:6px;background:var(--cel);border-radius:50%;animation:blink 2s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 .hero h1{font-family:'Space Grotesk',sans-serif;font-size:58px;font-weight:400;color:#fff;line-height:1;letter-spacing:-1px;margin-bottom:22px;max-width:820px}
-.hero h1 em{font-style:italic;color:rgba(255,255,255,.55)}
+.hero h1 em{font-style:italic;color:var(--cel)}
 .hero-p{font-size:16px;color:rgba(255,255,255,.6);line-height:1.7;max-width:520px;margin-bottom:40px;font-weight:300}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:64px}
 .btn-wh{background:#fff;color:var(--az);padding:14px 28px;font-size:13px;font-weight:600;border:none;cursor:pointer;border-radius:7px;text-decoration:none;display:inline-block;transition:all .25s}
@@ -132,10 +132,9 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--fondo);color:va
 .qp-ico svg{width:20px;height:20px;stroke:var(--azl);fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
 .qp-t{font-size:12px;font-weight:700;color:var(--az);text-transform:uppercase;letter-spacing:.3px;margin-bottom:4px}
 .qp-d{font-size:11px;color:var(--txtm);line-height:1.55;font-weight:300}
-.qs-imgs{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:260px 180px;gap:10px}
-.qs-imgs img{width:100%;height:100%;object-fit:cover;border-radius:12px;display:block;transition:transform .4s}
+.qs-imgs{display:block}
+.qs-imgs img{width:100%;height:440px;object-fit:cover;border-radius:12px;display:block;transition:transform .4s}
 .qs-imgs img:hover{transform:scale(1.02)}
-.qs-imgs img:first-child{grid-column:1/-1}
 
 /* ── SERVICIOS — formato horizontal moderno ── */
 .svc-list{display:flex;flex-direction:column;gap:0;border:1.5px solid var(--b);border-radius:14px;overflow:hidden}
@@ -154,13 +153,14 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--fondo);color:va
 .svc-row-arr svg{width:14px;height:14px;stroke:var(--txtm);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:all .25s}
 .svc-row:hover .svc-row-arr,.svc-row.active .svc-row-arr{background:var(--azl);border-color:var(--azl)}
 .svc-row:hover .svc-row-arr svg,.svc-row.active .svc-row-arr svg{stroke:#fff;transform:rotate(90deg)}
-.svc-panel{display:none;background:var(--fondo);border-top:1px solid var(--b);padding:24px 28px 24px 108px;animation:fi .3s}
+.svc-panel{display:none;background:var(--fondo);border-top:1px solid var(--b);animation:fi .3s}
 .svc-panel.open{display:block}
 @keyframes fi{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
-.sp-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
-.sp-grid p{font-size:13px;color:var(--txtm);line-height:1.85;font-weight:300}
-.sp-imgs{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.sp-imgs img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;display:block}
+.sp-imgs{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:20px 28px 0 108px}
+.sp-imgs::-webkit-scrollbar{display:none}
+.sp-imgs img{flex-shrink:0;width:320px;height:215px;object-fit:cover;border-radius:8px;display:block;scroll-snap-align:start;transition:opacity .2s}
+.sp-imgs img:hover{opacity:.9}
+.sp-desc{font-size:15px;color:var(--txtm);line-height:1.85;font-weight:300;padding:16px 28px 24px 108px}
 
 /* ── INDUSTRIAS — compacto ── */
 .ind-scroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
@@ -205,7 +205,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--fondo);color:va
 .maq-det-ph svg{width:48px;height:48px;stroke:var(--b2);fill:none;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 12px;display:block}
 .maq-det-ph p{font-size:13px;color:var(--txtm);font-weight:300}
 .mdi{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;animation:fi .3s}
-.mdi-img{width:100%;height:200px;object-fit:cover;border-radius:10px;display:block;margin-bottom:12px}
+.mdi-img{width:100%;height:270px;object-fit:cover;border-radius:10px;display:block;margin-bottom:12px}
 .mdi-img-ph{width:100%;height:200px;background:var(--celf);border-radius:10px;margin-bottom:12px;display:flex;align-items:center;justify-content:center}
 .mdi-img-ph svg{width:52px;height:52px;stroke:var(--b2);fill:none;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round}
 .mdi-sg{display:grid;grid-template-columns:1fr 1fr;gap:6px}
@@ -223,7 +223,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--fondo);color:va
 .proy-g{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .proy-card{background:var(--blanco);border:1.5px solid var(--b);border-radius:14px;overflow:hidden;cursor:pointer;transition:all .3s}
 .proy-card:hover{box-shadow:0 16px 40px var(--sh2);transform:translateY(-4px)}
-.proy-img{position:relative;overflow:hidden;height:200px}
+.proy-img{position:relative;overflow:hidden;height:230px}
 .proy-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;filter:saturate(.85)}
 .proy-card:hover .proy-img img{transform:scale(1.07);filter:saturate(1)}
 .proy-sector-badge{position:absolute;top:14px;left:14px;padding:4px 12px;border-radius:20px;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;backdrop-filter:blur(8px)}
@@ -303,6 +303,11 @@ textarea{resize:none;height:90px;margin-bottom:9px}
 .footer-by a{color:rgba(255,255,255,.4);text-decoration:none;font-weight:600;transition:color .2s}
 .footer-by a:hover{color:var(--cel)}
 
+/* ── WHATSAPP FLOAT ── */
+.wa-float{position:fixed;bottom:28px;right:28px;z-index:400;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.5);transition:all .3s;text-decoration:none}
+.wa-float:hover{background:#1ebe5a;transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,.6)}
+.wa-float svg{width:30px;height:30px;fill:#fff}
+
 /* ── RESP ── */
 @media(max-width:960px){
   .nav{padding:0 20px}
@@ -319,7 +324,10 @@ textarea{resize:none;height:90px;margin-bottom:9px}
   .mdi{grid-template-columns:1fr}
   .svc-row{grid-template-columns:40px 1fr auto;gap:0}
   .svc-row-tags{display:none}
-  .sp-grid{grid-template-columns:1fr}
+  .sp-imgs{padding:16px 16px 0}
+  .sp-imgs img{width:260px;height:175px}
+  .sp-desc{padding:12px 16px 20px}
+  .qs-imgs img{height:280px}
   .ind-scroll{flex-wrap:nowrap}
   .sec{padding:60px 20px}
   .footer{padding:28px 20px;flex-direction:column;align-items:flex-start}.flinks{display:none}
@@ -430,16 +438,14 @@ textarea{resize:none;height:90px;margin-bottom:9px}
     </div>
     <div class="rr">
       <div class="qs-imgs">
-        <img src="imgs/qs-1.jpg" alt="">
-        <img src="imgs/qs-2.jpg" alt="">
-        <img src="imgs/qs-3.jpg" alt="">
+        <img src="imgs/qs-1.jpg" alt="Taller Plusermec S.A.">
       </div>
     </div>
   </div>
 </section>
 
 <!-- INDUSTRIAS -->
-<section class="sec sec-f" id="industrias" style="padding-top:0;padding-bottom:48px">
+<section class="sec sec-f" id="industrias" style="padding-top:48px;padding-bottom:48px">
   <div class="ind-scroll rv">
     <div class="icard d1"><div class="icard-ico"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><div class="icard-n" data-i="in1">Minería</div><div class="icard-d" data-i="id1">Tromeles, cintas, estructuras</div></div>
     <div class="icard d2"><div class="icard-ico"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 12H2"/></svg></div><div class="icard-n" data-i="in2">Oil & Gas</div><div class="icard-d" data-i="id2">Bombeo, válvulas, bridas</div></div>
@@ -466,7 +472,7 @@ textarea{resize:none;height:90px;margin-bottom:9px}
       <div class="svc-row-tags"><span class="stag">CNC</span><span class="stag">Tornería</span><span class="stag">Fresado</span><span class="stag">Alesado</span><span class="stag">Rectificado</span></div>
       <div class="svc-row-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
     </div>
-    <div class="svc-panel" id="sp-s1"><div class="sp-grid"><p data-i="sd1p">El mecanizado de precisión es el núcleo de nuestro trabajo. Torneamos, fresamos, alesamos y rectificamos piezas industriales con tolerancias desde ±0,01mm, cumpliendo los requerimientos más exigentes de la industria pesada. Trabajamos ejes de transmisión, coronas dentadas, rodillos industriales, camisas de cilindro, bridas, pistas de rodadura y cualquier componente rotativo o prismático. Operamos en aceros al carbono, inoxidables AISI 304/316, bronces, fundición gris y nodular, y aleaciones especiales. Para piezas de gran porte, contamos con capacidad de volteo hasta Ø2000mm y 4000mm entre puntas — una de las mayores de la región — con tornos POREBA, TRAVIS, TURRI, PPL y TRAUB, y un Centro de Mecanizado CNC TRAVIS para operaciones múltiples en una sola sujección.</p><div class="sp-imgs"><img src="imgs/mec-1.jpg" alt=""><img src="imgs/mec-2.jpg" alt=""></div></div></div>
+    <div class="svc-panel" id="sp-s1"><div class="sp-imgs"><img src="imgs/mec-1.jpg" alt=""><img src="imgs/mec-2.jpg" alt=""></div><p class="sp-desc" data-i="sd1p">El mecanizado de precisión es el núcleo de nuestro trabajo. Torneamos, fresamos, alesamos y rectificamos piezas industriales con tolerancias desde ±0,01mm, cumpliendo los requerimientos más exigentes de la industria pesada. Trabajamos ejes de transmisión, coronas dentadas, rodillos industriales, camisas de cilindro, bridas, pistas de rodadura y cualquier componente rotativo o prismático. Operamos en aceros al carbono, inoxidables AISI 304/316, bronces, fundición gris y nodular, y aleaciones especiales. Para piezas de gran porte, contamos con capacidad de volteo hasta Ø2000mm y 4000mm entre puntas — una de las mayores de la región — con tornos POREBA, TRAVIS, TURRI, PPL y TRAUB, y un Centro de Mecanizado CNC TRAVIS para operaciones múltiples en una sola sujección.</p></div>
 
     <div class="svc-row" data-s="s2">
       <div class="svc-row-num">02</div>
@@ -474,7 +480,7 @@ textarea{resize:none;height:90px;margin-bottom:9px}
       <div class="svc-row-tags"><span class="stag">Planos o muestras</span><span class="stag">Engranajes</span><span class="stag">Series cortas</span></div>
       <div class="svc-row-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
     </div>
-    <div class="svc-panel" id="sp-s2"><div class="sp-grid"><p data-i="sd2p">Cuando una pieza se rompe o se desgasta y no hay repuesto disponible en el mercado, Plusermec la fabrica. Reproducimos cualquier componente mecánico a partir de un plano técnico, una muestra física o simplemente las medidas relevadas en planta. Fabricamos engranajes rectos, helicoidales y cónicos para cajas de transmisión industrial, así como bujes, casquillos, arandelas de empuje, chavetas, árboles y todo tipo de elementos de máquinas. Nuestras fresadoras CNC permiten micromecanizados con fresas desde 0,5mm para electrodos y matrices de alta precisión. Trabajamos en acero, inoxidable, bronce, aluminio, plástico de ingeniería y materiales especiales.</p><div class="sp-imgs"><img src="imgs/rep-1.jpg" alt=""><img src="imgs/rep-2.jpg" alt=""></div></div></div>
+    <div class="svc-panel" id="sp-s2"><div class="sp-imgs"><img src="imgs/rep-1.jpg" alt=""><img src="imgs/rep-2.jpg" alt=""></div><p class="sp-desc" data-i="sd2p">Cuando una pieza se rompe o se desgasta y no hay repuesto disponible en el mercado, Plusermec la fabrica. Reproducimos cualquier componente mecánico a partir de un plano técnico, una muestra física o simplemente las medidas relevadas en planta. Fabricamos engranajes rectos, helicoidales y cónicos para cajas de transmisión industrial, así como bujes, casquillos, arandelas de empuje, chavetas, árboles y todo tipo de elementos de máquinas. Nuestras fresadoras CNC permiten micromecanizados con fresas desde 0,5mm para electrodos y matrices de alta precisión. Trabajamos en acero, inoxidable, bronce, aluminio, plástico de ingeniería y materiales especiales.</p></div>
 
     <div class="svc-row" data-s="s3">
       <div class="svc-row-num">03</div>
@@ -482,7 +488,7 @@ textarea{resize:none;height:90px;margin-bottom:9px}
       <div class="svc-row-tags"><span class="stag">Cilindros hidráulicos</span><span class="stag">Tromeles</span><span class="stag">Preventivo</span><span class="stag">In situ</span></div>
       <div class="svc-row-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
     </div>
-    <div class="svc-panel" id="sp-s3"><div class="sp-grid"><p data-i="sd3p">El objetivo de cada intervención de reparación es devolver la pieza a sus condiciones originales de operación — o mejorarlas. Recuperamos cilindros hidráulicos con vástagos rayados o desgastados, reparamos cuerpos de bombas y válvulas industriales, reconstruimos asientos de rodamientos con cromado duro o metalización, y corregimos geometrías en piezas que sufrieron impactos o deformaciones. Para equipos que no pueden ingresar al taller, nos desplazamos a planta con equipamiento portátil. Trabajamos bajo tiempo de parada controlado, coordinando con el área de mantenimiento del cliente para minimizar el impacto en la producción.</p><div class="sp-imgs"><img src="imgs/rep-mant-1.jpg" alt=""><img src="imgs/rep-mant-2.jpg" alt=""></div></div></div>
+    <div class="svc-panel" id="sp-s3"><div class="sp-imgs"><img src="imgs/rep-mant-1.jpg" alt=""><img src="imgs/rep-mant-2.jpg" alt=""></div><p class="sp-desc" data-i="sd3p">El objetivo de cada intervención de reparación es devolver la pieza a sus condiciones originales de operación — o mejorarlas. Recuperamos cilindros hidráulicos con vástagos rayados o desgastados, reparamos cuerpos de bombas y válvulas industriales, reconstruimos asientos de rodamientos con cromado duro o metalización, y corregimos geometrías en piezas que sufrieron impactos o deformaciones. Para equipos que no pueden ingresar al taller, nos desplazamos a planta con equipamiento portátil. Trabajamos bajo tiempo de parada controlado, coordinando con el área de mantenimiento del cliente para minimizar el impacto en la producción.</p></div>
 
     <div class="svc-row" data-s="s4">
       <div class="svc-row-num">04</div>
@@ -490,7 +496,7 @@ textarea{resize:none;height:90px;margin-bottom:9px}
       <div class="svc-row-tags"><span class="stag">CAD</span><span class="stag">Cintas</span><span class="stag">Silos</span><span class="stag">Estructuras metálicas</span></div>
       <div class="svc-row-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
     </div>
-    <div class="svc-panel" id="sp-s4"><div class="sp-grid"><p data-i="sd4p">Cuando el mercado no tiene lo que el proceso productivo necesita, lo diseñamos y construimos. Desarrollamos equipos industriales a medida: sistemas de transporte de material (cintas modulares de hasta 22 metros), silos y tolvas de almacenamiento, separadores, bombas para sólidos y dispositivos de manipulación especiales. El proceso parte del relevamiento de necesidades, continúa con el diseño en CAD con cálculo estructural y de proceso, y termina con la fabricación completa en taller y el montaje con equipo propio en planta. Entregamos el equipo funcionando, no solo fabricado. Materiales según especificación del cliente o industria: acero estructural, inoxidable sanitario o industrial, o materiales especiales según el fluido o producto en contacto.</p><div class="sp-imgs"><img src="imgs/dis-1.jpg" alt=""><img src="imgs/dis-2.jpg" alt=""></div></div></div>
+    <div class="svc-panel" id="sp-s4"><div class="sp-imgs"><img src="imgs/dis-1.jpg" alt=""><img src="imgs/dis-2.jpg" alt=""></div><p class="sp-desc" data-i="sd4p">Cuando el mercado no tiene lo que el proceso productivo necesita, lo diseñamos y construimos. Desarrollamos equipos industriales a medida: sistemas de transporte de material (cintas modulares de hasta 22 metros), silos y tolvas de almacenamiento, separadores, bombas para sólidos y dispositivos de manipulación especiales. El proceso parte del relevamiento de necesidades, continúa con el diseño en CAD con cálculo estructural y de proceso, y termina con la fabricación completa en taller y el montaje con equipo propio en planta. Entregamos el equipo funcionando, no solo fabricado. Materiales según especificación del cliente o industria: acero estructural, inoxidable sanitario o industrial, o materiales especiales según el fluido o producto en contacto.</p></div>
 
     <div class="svc-row" data-s="s5">
       <div class="svc-row-num">05</div>
@@ -498,7 +504,7 @@ textarea{resize:none;height:90px;margin-bottom:9px}
       <div class="svc-row-tags"><span class="stag">Hardox</span><span class="stag">Inoxidable</span><span class="stag">TIG</span><span class="stag">MIG/MAG</span><span class="stag">Alta aleación</span></div>
       <div class="svc-row-arr"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
     </div>
-    <div class="svc-panel" id="sp-s5"><div class="sp-grid"><p data-i="sd5p">La soldadura en la industria pesada no es solo unir piezas: es garantizar integridad estructural bajo condiciones extremas de carga, vibración, temperatura o abrasión. En Plusermec trabajamos con procesos TIG y MIG/MAG sobre aceros inoxidables AISI 304 y 316, aluminio, aceros de alta aleación y Hardox. Aplicamos recubrimientos de Hardox 400 y 500 sobre superficies expuestas a abrasión severa — una técnica que puede multiplicar por cinco o más la vida útil de una pieza. Realizamos también construcciones estructurales de gran porte: bastidores, estructuras de soporte, pasarelas y equipos de más de 10 toneladas. Nuestro personal está calificado en procedimientos de soldadura para aplicaciones industriales críticas.</p><div class="sp-imgs"><img src="imgs/sold-1.jpg" alt=""><img src="imgs/sold-2.jpg" alt=""></div></div></div>
+    <div class="svc-panel" id="sp-s5"><div class="sp-imgs"><img src="imgs/sold-1.jpg" alt=""><img src="imgs/sold-2.jpg" alt=""></div><p class="sp-desc" data-i="sd5p">La soldadura en la industria pesada no es solo unir piezas: es garantizar integridad estructural bajo condiciones extremas de carga, vibración, temperatura o abrasión. En Plusermec trabajamos con procesos TIG y MIG/MAG sobre aceros inoxidables AISI 304 y 316, aluminio, aceros de alta aleación y Hardox. Aplicamos recubrimientos de Hardox 400 y 500 sobre superficies expuestas a abrasión severa — una técnica que puede multiplicar por cinco o más la vida útil de una pieza. Realizamos también construcciones estructurales de gran porte: bastidores, estructuras de soporte, pasarelas y equipos de más de 10 toneladas. Nuestro personal está calificado en procedimientos de soldadura para aplicaciones industriales críticas.</p></div>
   </div>
 </section>
 
@@ -567,6 +573,10 @@ textarea{resize:none;height:90px;margin-bottom:9px}
     <div class="fok" id="fok" data-i="f_ok">✓ Consulta enviada. Nos ponemos en contacto a la brevedad.</div>
   </div>
 </section>
+
+<a href="https://wa.me/5491160799302?text=Hola%2C%20me%20comunico%20desde%20la%20web%20de%20Plusermec." class="wa-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
 
 <div class="vbox" id="vbox"><div class="vbi"><button class="vbc" onclick="closeVideo()">✕</button><iframe class="vbf" id="vframe" src="" allowfullscreen></iframe></div></div>
 
@@ -661,7 +671,7 @@ const PROYECTOS = [
     desc:'Reparación y cambio de rodamientos en triturador industrial. Restauración de dimensiones originales con mecanizado de precisión.',
     desc_larga:'El eje principal del triturador presentaba desgaste en asientos de rodamientos. Se realizó el mecanizado de los asientos, el montaje de rodamientos nuevos con ajuste a presión en prensa hidráulica 100T y la verificación de alineación. Tiempo de intervención: 48 horas para no parar la línea más de lo necesario.',
     techs:['Mecanizado de ejes','Prensa hidráulica 100T','Rodamientos industriales','Alineación láser'],
-    video: 'dQw4w9WgXcQ'
+    video: null
   },
 ];
 
