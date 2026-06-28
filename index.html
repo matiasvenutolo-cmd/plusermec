@@ -907,9 +907,21 @@ document.querySelectorAll('.mcb').forEach(btn=>{
 // ── CARRUSEL SECTORES ──────────────────────────────────────────────────────
 (()=>{
   const scroll=document.getElementById('indScroll');
-  const step=()=>Math.round(scroll.offsetWidth*0.7)||200;
-  document.getElementById('indPrev').addEventListener('click',()=>scroll.scrollBy({left:-step(),behavior:'smooth'}));
-  document.getElementById('indNext').addEventListener('click',()=>scroll.scrollBy({left:step(),behavior:'smooth'}));
+  const cardW=()=>scroll.querySelector('.icard')?.offsetWidth+12||172;
+  document.getElementById('indPrev').addEventListener('click',()=>scroll.scrollBy({left:-cardW()*2,behavior:'smooth'}));
+  document.getElementById('indNext').addEventListener('click',()=>scroll.scrollBy({left:cardW()*2,behavior:'smooth'}));
+  // auto-scroll
+  let paused=false,timer;
+  const tick=()=>{
+    if(paused) return;
+    const maxScroll=scroll.scrollWidth-scroll.clientWidth;
+    if(scroll.scrollLeft>=maxScroll-2) scroll.scrollTo({left:0,behavior:'smooth'});
+    else scroll.scrollBy({left:cardW(),behavior:'smooth'});
+  };
+  timer=setInterval(tick,2200);
+  scroll.addEventListener('mouseenter',()=>paused=true);
+  scroll.addEventListener('mouseleave',()=>paused=false);
+  scroll.addEventListener('touchstart',()=>{paused=true;clearInterval(timer);},{passive:true});
 })();
 
 // ── CARRUSEL SERVICIO ──────────────────────────────────────────────────────
