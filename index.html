@@ -156,14 +156,22 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--fondo);color:va
 .svc-panel{display:none;background:var(--fondo);border-top:1px solid var(--b);animation:fi .3s}
 .svc-panel.open{display:block}
 @keyframes fi{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
-.sp-imgs{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:20px 28px 0 108px}
+.sp-imgs-wrap{position:relative}
+.sp-imgs{display:flex;gap:0;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .sp-imgs::-webkit-scrollbar{display:none}
-.sp-imgs img{flex-shrink:0;width:320px;height:215px;object-fit:cover;border-radius:8px;display:block;scroll-snap-align:start;transition:opacity .2s}
-.sp-imgs img:hover{opacity:.9}
+.sp-imgs img{flex-shrink:0;width:100%;height:300px;object-fit:cover;display:block;scroll-snap-align:start}
+.sp-imgs-btn{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;background:rgba(255,255,255,.92);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.22);transition:all .22s;z-index:2;font-size:22px;line-height:1;color:var(--az);font-weight:300;padding:0}
+.sp-imgs-btn:hover{background:#fff;box-shadow:0 4px 18px rgba(0,0,0,.3);transform:translateY(-50%) scale(1.08)}
+.sp-imgs-btn.sp-prev{left:12px}
+.sp-imgs-btn.sp-next{right:12px}
+.sp-imgs-counter{position:absolute;bottom:10px;right:14px;background:rgba(0,0,0,.48);color:#fff;font-size:11px;font-weight:600;padding:3px 9px;border-radius:12px;pointer-events:none;letter-spacing:.3px}
 .sp-desc{font-size:15px;color:var(--txtm);line-height:1.85;font-weight:300;padding:16px 28px 24px 108px}
 
 /* ── INDUSTRIAS — compacto ── */
-.ind-scroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.ind-carousel-wrap{display:flex;align-items:center;gap:10px}
+.ind-arr{flex-shrink:0;width:38px;height:38px;background:var(--blanco);border:1.5px solid var(--b);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;line-height:1;color:var(--txtm);transition:all .22s;box-shadow:0 2px 8px var(--sh);padding:0}
+.ind-arr:hover{background:var(--azl);border-color:var(--azl);color:#fff}
+.ind-scroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;flex:1}
 .ind-scroll::-webkit-scrollbar{display:none}
 .icard{flex-shrink:0;background:var(--blanco);border:1.5px solid var(--b);border-radius:10px;padding:18px 20px;min-width:160px;transition:all .25s;cursor:default}
 .icard:hover{border-color:var(--azl);box-shadow:0 4px 14px var(--sh2);transform:translateY(-2px)}
@@ -223,8 +231,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--fondo);color:va
 .proy-g{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .proy-card{background:var(--blanco);border:1.5px solid var(--b);border-radius:14px;overflow:hidden;cursor:pointer;transition:all .3s}
 .proy-card:hover{box-shadow:0 16px 40px var(--sh2);transform:translateY(-4px)}
-.proy-img{position:relative;overflow:hidden;height:230px}
-.proy-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;filter:saturate(.85)}
+.proy-img{position:relative;overflow:hidden;padding-bottom:66%}
+.proy-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s;filter:saturate(.85)}
 .proy-card:hover .proy-img img{transform:scale(1.07);filter:saturate(1)}
 .proy-sector-badge{position:absolute;top:14px;left:14px;padding:4px 12px;border-radius:20px;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;backdrop-filter:blur(8px)}
 .proy-body{padding:20px 22px}
@@ -324,11 +332,11 @@ textarea{resize:none;height:90px;margin-bottom:9px}
   .mdi{grid-template-columns:1fr}
   .svc-row{grid-template-columns:40px 1fr auto;gap:0}
   .svc-row-tags{display:none}
-  .sp-imgs{padding:16px 16px 0}
-  .sp-imgs img{width:260px;height:175px}
+  .sp-imgs img{height:220px}
   .sp-desc{padding:12px 16px 20px}
   .qs-imgs img{height:280px}
   .ind-scroll{flex-wrap:nowrap}
+  .ind-arr{display:none}
   .sec{padding:60px 20px}
   .footer{padding:28px 20px;flex-direction:column;align-items:flex-start}.flinks{display:none}
 }
@@ -438,7 +446,7 @@ textarea{resize:none;height:90px;margin-bottom:9px}
     </div>
     <div class="rr">
       <div class="qs-imgs">
-        <img src="imgs/qs-1.jpg" alt="Taller Plusermec S.A.">
+        <img src="imgs/hero.jpg" alt="Taller Plusermec S.A.">
       </div>
     </div>
   </div>
@@ -446,7 +454,9 @@ textarea{resize:none;height:90px;margin-bottom:9px}
 
 <!-- INDUSTRIAS -->
 <section class="sec sec-f" id="industrias" style="padding-top:48px;padding-bottom:48px">
-  <div class="ind-scroll rv">
+  <div class="ind-carousel-wrap">
+  <button class="ind-arr" id="indPrev" aria-label="Anterior">‹</button>
+  <div class="ind-scroll" id="indScroll">
     <div class="icard d1"><div class="icard-ico"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><div class="icard-n" data-i="in1">Minería</div><div class="icard-d" data-i="id1">Tromeles, cintas, estructuras</div></div>
     <div class="icard d2"><div class="icard-ico"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 12H2"/></svg></div><div class="icard-n" data-i="in2">Oil & Gas</div><div class="icard-d" data-i="id2">Bombeo, válvulas, bridas</div></div>
     <div class="icard d3"><div class="icard-ico"><svg viewBox="0 0 24 24"><path d="M2 21c0 0 4-2 10-2s10 2 10 2M12 3v12M5 10l7-7 7 7M3 17l2-4h14l2 4"/></svg></div><div class="icard-n" data-i="in3">Naval</div><div class="icard-d" data-i="id3">Ejes, hélices, propulsión</div></div>
@@ -455,6 +465,8 @@ textarea{resize:none;height:90px;margin-bottom:9px}
     <div class="icard d2"><div class="icard-ico"><svg viewBox="0 0 24 24"><path d="M9 3h6M9 3v8l-4 9h14l-4-9V3M9 3H7M15 3h2"/><circle cx="12" cy="17" r="1"/></svg></div><div class="icard-n" data-i="in6">Química</div><div class="icard-d" data-i="id6">Agitadores, intercambiadores</div></div>
     <div class="icard d3"><div class="icard-ico"><svg viewBox="0 0 24 24"><path d="M2 20h20M4 20V10l8-8 8 8v10M10 20v-5h4v5"/></svg></div><div class="icard-n" data-i="in7">Construcción</div><div class="icard-d" data-i="id7">Estructuras, plataformas</div></div>
     <div class="icard d4"><div class="icard-ico"><svg viewBox="0 0 24 24"><path d="M3 6c0 0 4-2 9-2s9 2 9 2M3 12c0 0 4-2 9-2s9 2 9 2M3 18c0 0 4-2 9-2s9 2 9 2"/></svg></div><div class="icard-n" data-i="in8">Textil</div><div class="icard-d" data-i="id8">Rodillos, piezas de precisión</div></div>
+  </div>
+  <button class="ind-arr" id="indNext" aria-label="Siguiente">›</button>
   </div>
 </section>
 
@@ -892,6 +904,46 @@ document.querySelectorAll('.mcb').forEach(btn=>{
   });
 });
 
+// ── CARRUSEL SECTORES ──────────────────────────────────────────────────────
+(()=>{
+  const scroll=document.getElementById('indScroll');
+  const step=()=>Math.round(scroll.offsetWidth*0.7)||200;
+  document.getElementById('indPrev').addEventListener('click',()=>scroll.scrollBy({left:-step(),behavior:'smooth'}));
+  document.getElementById('indNext').addEventListener('click',()=>scroll.scrollBy({left:step(),behavior:'smooth'}));
+})();
+
+// ── CARRUSEL SERVICIO ──────────────────────────────────────────────────────
+function initSvcCarousel(panel){
+  const track=panel.querySelector('.sp-imgs');
+  if(!track||track.dataset.ci) return;
+  track.dataset.ci='1';
+  const imgs=track.querySelectorAll('img');
+  if(imgs.length<=1) return;
+  let idx=0;
+  const wrap=document.createElement('div');
+  wrap.className='sp-imgs-wrap';
+  track.parentNode.insertBefore(wrap,track);
+  wrap.appendChild(track);
+  const prev=document.createElement('button');
+  prev.type='button';prev.className='sp-imgs-btn sp-prev';prev.innerHTML='‹';prev.setAttribute('aria-label','Anterior');
+  const next=document.createElement('button');
+  next.type='button';next.className='sp-imgs-btn sp-next';next.innerHTML='›';next.setAttribute('aria-label','Siguiente');
+  const cnt=document.createElement('div');
+  cnt.className='sp-imgs-counter';cnt.textContent=`1 / ${imgs.length}`;
+  wrap.append(prev,next,cnt);
+  const go=n=>{
+    idx=Math.max(0,Math.min(imgs.length-1,n));
+    track.scrollTo({left:idx*track.offsetWidth,behavior:'smooth'});
+    cnt.textContent=`${idx+1} / ${imgs.length}`;
+  };
+  prev.addEventListener('click',()=>go(idx-1));
+  next.addEventListener('click',()=>go(idx+1));
+  track.addEventListener('scroll',()=>{
+    const n=Math.round(track.scrollLeft/track.offsetWidth);
+    if(n!==idx){idx=n;cnt.textContent=`${idx+1} / ${imgs.length}`;}
+  },{passive:true});
+}
+
 // ── SERVICIOS ──────────────────────────────────────────────────────────────
 let ap=null;
 document.querySelectorAll('.svc-row').forEach(r=>{
@@ -899,7 +951,7 @@ document.querySelectorAll('.svc-row').forEach(r=>{
     const id='sp-'+r.dataset.s,panel=document.getElementById(id);
     if(ap&&ap!==panel){ap.classList.remove('open');document.querySelectorAll('.svc-row').forEach(x=>x.classList.remove('active'));}
     if(panel.classList.contains('open')){panel.classList.remove('open');r.classList.remove('active');ap=null;}
-    else{panel.classList.add('open');r.classList.add('active');ap=panel;setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'nearest'}),50);}
+    else{panel.classList.add('open');r.classList.add('active');ap=panel;initSvcCarousel(panel);setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'nearest'}),50);}
   });
 });
 
