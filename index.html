@@ -904,24 +904,29 @@ document.querySelectorAll('.mcb').forEach(btn=>{
   });
 });
 
-// ── CARRUSEL SECTORES ──────────────────────────────────────────────────────
+// ── CARRUSEL SECTORES — scroll continuo ────────────────────────────────────
 (()=>{
   const scroll=document.getElementById('indScroll');
-  const cardW=()=>scroll.querySelector('.icard')?.offsetWidth+12||172;
-  document.getElementById('indPrev').addEventListener('click',()=>scroll.scrollBy({left:-cardW()*2,behavior:'smooth'}));
-  document.getElementById('indNext').addEventListener('click',()=>scroll.scrollBy({left:cardW()*2,behavior:'smooth'}));
-  // auto-scroll
-  let paused=false,timer;
-  const tick=()=>{
-    if(paused) return;
-    const maxScroll=scroll.scrollWidth-scroll.clientWidth;
-    if(scroll.scrollLeft>=maxScroll-2) scroll.scrollTo({left:0,behavior:'smooth'});
-    else scroll.scrollBy({left:cardW(),behavior:'smooth'});
+  // Duplicar tarjetas para loop infinito seamless
+  [...scroll.children].forEach(c=>scroll.appendChild(c.cloneNode(true)));
+  let pos=0,paused=false;
+  const speed=0.45; // px por frame (~27px/s a 60fps)
+  const half=()=>scroll.scrollWidth/2;
+  const frame=()=>{
+    if(!paused){
+      pos+=speed;
+      if(pos>=half()) pos=0;
+      scroll.scrollLeft=pos;
+    }
+    requestAnimationFrame(frame);
   };
-  timer=setInterval(tick,2200);
+  requestAnimationFrame(frame);
   scroll.addEventListener('mouseenter',()=>paused=true);
   scroll.addEventListener('mouseleave',()=>paused=false);
-  scroll.addEventListener('touchstart',()=>{paused=true;clearInterval(timer);},{passive:true});
+  scroll.addEventListener('touchstart',()=>paused=true,{passive:true});
+  scroll.addEventListener('touchend',()=>setTimeout(()=>paused=false,1200),{passive:true});
+  document.getElementById('indPrev').addEventListener('click',()=>{pos=Math.max(0,pos-180);});
+  document.getElementById('indNext').addEventListener('click',()=>{pos=Math.min(half()-1,pos+180);});
 })();
 
 // ── CARRUSEL SERVICIO ──────────────────────────────────────────────────────
