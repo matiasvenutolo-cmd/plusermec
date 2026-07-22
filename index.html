@@ -859,11 +859,9 @@ function renderList(cat){
         <div class="mi-qty">×${m.cant}</div>
       </div>
     </div>`).join('');
-  // Auto-open new machine if present
-  if(cat==='all'||cat==='ales'){
-    const newMaq=MQ.find(m=>m.isNew);
-    if(newMaq) setTimeout(()=>showMaq(newMaq.id),100);
-  }
+  // Auto-open primera máquina de la vista que tenga imagen
+  const first=items.find(m=>m.img);
+  if(first) setTimeout(()=>showMaq(first.id),100);
 }
 
 function showMaq(id){
