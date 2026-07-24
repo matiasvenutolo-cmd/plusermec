@@ -298,6 +298,8 @@ textarea{resize:none;height:90px;margin-bottom:9px}
 .fsub{background:var(--az);color:#fff;padding:13px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;border:none;cursor:pointer;border-radius:8px;width:100%;transition:all .2s}
 .fsub:hover{background:var(--azm);transform:translateY(-1px);box-shadow:0 4px 12px rgba(12,35,64,.18)}
 .fok{display:none;background:#e8f5e9;border:1.5px solid #a5d6a7;padding:12px;border-radius:8px;font-size:12px;color:#2e7d32;margin-top:8px;text-align:center}
+.ferr{display:none;background:#fdecea;border:1.5px solid #f5c6cb;padding:12px;border-radius:8px;font-size:12px;color:#a12622;margin-top:8px;text-align:center}
+.fsub:disabled{opacity:.6;cursor:not-allowed;transform:none;box-shadow:none}
 
 /* ── FOOTER ── */
 .footer{background:var(--az);padding:36px 60px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
@@ -578,11 +580,16 @@ textarea{resize:none;height:90px;margin-bottom:9px}
   </div>
   <div class="rr">
     <div class="sec-kicker" style="margin-bottom:14px" data-i="f_kick">Formulario</div>
-    <div class="fr"><input type="text" placeholder="Nombre" data-ph="pN"><input type="text" placeholder="Empresa" data-ph="pE"></div>
-    <div class="fr"><input type="email" placeholder="Email" data-ph="pM"><input type="text" placeholder="Teléfono" data-ph="pT"></div>
-    <select style="margin-bottom:9px"><option data-i="fo1">Seleccioná un servicio</option><option>Mecanizado de precisión</option><option>Fabricación de repuestos</option><option>Reparación y mantenimiento</option><option>Diseño y fabricación</option><option>Soldaduras especiales</option></select>
-    <textarea placeholder="Describí tu proyecto o consulta..." data-ph="pMg"></textarea>
-    <button class="fsub" id="fsub" data-i="f_btn">Enviar consulta</button>
+    <form id="contactForm" action="https://formspree.io/f/mpqvybop" method="POST">
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" aria-hidden="true">
+      <input type="hidden" name="_subject" value="Nueva consulta desde plusermec.com.ar">
+      <div class="fr"><input type="text" name="Nombre" placeholder="Nombre" data-ph="pN"><input type="text" name="Empresa" placeholder="Empresa" data-ph="pE"></div>
+      <div class="fr"><input type="email" name="email" placeholder="Email" data-ph="pM" required><input type="text" name="Teléfono" placeholder="Teléfono" data-ph="pT"></div>
+      <select name="Servicio" style="margin-bottom:9px"><option data-i="fo1">Seleccioná un servicio</option><option>Mecanizado de precisión</option><option>Fabricación de repuestos</option><option>Reparación y mantenimiento</option><option>Diseño y fabricación</option><option>Soldaduras especiales</option></select>
+      <textarea name="message" placeholder="Describí tu proyecto o consulta..." data-ph="pMg" required></textarea>
+      <button type="submit" class="fsub" id="fsub" data-i="f_btn">Enviar consulta</button>
+      <div class="ferr" id="ferr"></div>
+    </form>
     <div class="fok" id="fok" data-i="f_ok">✓ Consulta enviada. Nos ponemos en contacto a la brevedad.</div>
   </div>
 </section>
@@ -981,10 +988,30 @@ function openVideo(id){document.getElementById('vframe').src=`https://www.youtub
 function closeVideo(){document.getElementById('vframe').src='';document.getElementById('vbox').classList.remove('open');}
 document.getElementById('vbox').addEventListener('click',e=>{if(e.target===document.getElementById('vbox'))closeVideo();});
 
-// ── FORM ───────────────────────────────────────────────────────────────────
-document.getElementById('fsub').addEventListener('click',()=>{
-  document.getElementById('fsub').style.display='none';
-  document.getElementById('fok').style.display='block';
+// ── FORM (Formspree AJAX) ──────────────────────────────────────────────────
+document.getElementById('contactForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const form=e.target,btn=document.getElementById('fsub'),ok=document.getElementById('fok'),err=document.getElementById('ferr');
+  err.style.display='none';
+  const orig=btn.textContent;
+  btn.disabled=true;btn.textContent='Enviando…';
+  try{
+    const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
+    if(res.ok){
+      form.style.display='none';
+      ok.style.display='block';
+      ok.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }else{
+      let msg='No se pudo enviar. Probá de nuevo o escribinos por WhatsApp.';
+      try{const d=await res.json();if(d&&d.errors&&d.errors.length)msg=d.errors.map(x=>x.message).join(', ');}catch(_){}
+      err.textContent=msg;err.style.display='block';
+      btn.disabled=false;btn.textContent=orig;
+    }
+  }catch(_){
+    err.textContent='Error de conexión. Probá de nuevo o escribinos por WhatsApp.';
+    err.style.display='block';
+    btn.disabled=false;btn.textContent=orig;
+  }
 });
 
 // ── SMOOTH SCROLL ──────────────────────────────────────────────────────────
