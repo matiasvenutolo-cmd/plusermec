@@ -704,10 +704,16 @@ const PROYECTOS = [
   },
 ];
 
+let LANG='es';
+const SECTOR_TR={"Alimentos": {"en": "Food", "pt": "Alimentos"}, "Industrial": {"en": "Industrial", "pt": "Industrial"}};
+const PROY_TR={"p1": {"en": {"cliente": "Poultry Industry", "ttl": "Double conveyor belt — 22 m long", "desc": "Process-waste evacuation system with two parallel belts. 22 metres long and 5 metres high with direct discharge onto skips.", "desc_larga": "A full design-and-build project: from needs assessment, structural CAD design, complete in-house manufacturing and plant commissioning. The system operates in high humidity and temperature, so corrosion-resistant materials and an easy-maintenance design were prioritised.", "techs": ["CAD design", "Structural fabrication", "CNC machining", "Commissioning"]}, "pt": {"cliente": "Indústria Avícola", "ttl": "Correia transportadora dupla — 22 m de comprimento", "desc": "Sistema de evacuação de resíduos de processo com duas correias paralelas. 22 metros de comprimento e 5 metros de altura com descarga direta sobre caçambas.", "desc_larga": "Projeto de design e fabricação integral: do levantamento de necessidades, o projeto estrutural em CAD, a fabricação completa na oficina e a colocação em funcionamento na planta. O sistema opera em condições de alta umidade e temperatura, por isso priorizaram-se materiais anticorrosivos e um design de fácil manutenção.", "techs": ["Projeto CAD", "Fabricação estrutural", "Usinagem CNC", "Comissionamento"]}}, "p2": {"en": {"cliente": "Industrial client", "ttl": "Raceway recovery on industrial trommel — Ø 3 metres", "desc": "Replacement and machining of the raceway of a 3-metre-diameter trommel, a key part in a continuous production system.", "desc_larga": "The original raceway showed severe wear. A new raceway was removed and welded in the workshop. The large boring machine was adapted to machine an out-of-range diameter. Fine adjustments for alignment and concentricity. On-site assembly guaranteeing vibration-free operation. Delivery time: 12 days.", "techs": ["Large-scale boring", "Structural welding", "Precision fitting", "On-site assembly"]}, "pt": {"cliente": "Cliente industrial", "ttl": "Recuperação de pista em trommel industrial — Ø 3 metros", "desc": "Substituição e usinagem da pista de rolamento de um trommel de 3 metros de diâmetro, peça chave num sistema de produção contínua.", "desc_larga": "A pista original apresentava desgaste severo. Desmontou-se e soldou-se uma nova pista na oficina. Adaptou-se a mandriladora de grande porte para usinar um diâmetro fora de faixa. Ajustes finos para alinhamento e concentricidade. Montagem na planta garantindo funcionamento sem vibrações. Prazo de entrega: 12 dias.", "techs": ["Mandrilamento de grande porte", "Soldagem estrutural", "Ajuste de precisão", "Montagem in situ"]}}, "p3": {"en": {"cliente": "Industrial plant", "ttl": "Fabrication and assembly of steel structure", "desc": "Large-scale structure for an industrial plant. Design, cutting, welding and assembly entirely carried out by the Plusermec team.", "desc_larga": "A turnkey project including on-site assessment, structural design, complete in-house manufacturing and assembly with our own team. Material: high-strength structural steel. Certified welding. Design load: 20 tonnes.", "techs": ["Structural design", "High-strength welding", "Industrial assembly", "Logistics coordination"]}, "pt": {"cliente": "Planta industrial", "ttl": "Fabricação e montagem de estrutura metálica", "desc": "Estrutura de grande porte para planta industrial. Projeto, corte, soldagem e montagem inteiramente realizados pela equipe da Plusermec.", "desc_larga": "Projeto chave na mão que incluiu o levantamento na planta, o projeto estrutural, a fabricação completa na oficina e a montagem com equipe própria. Material: aço estrutural de alta resistência. Soldagem certificada. Carga de projeto: 20 toneladas.", "techs": ["Projeto estrutural", "Soldagem de alta resistência", "Montagem industrial", "Coordenação logística"]}}, "p4": {"en": {"cliente": "Logistics industry", "ttl": "Design and fabrication of a battery exchanger for forklifts", "desc": "System developed 100% in-house at Plusermec, from CAD design to complete fabrication. It makes forklift battery changes easier with a reinforced structure and sliding rollers.", "desc_larga": "When the job demands safety, precision and speed, there is no margin for error. This system was developed 100% at Plusermec, from CAD design to complete fabrication. Designed to make forklift battery changes easier in industrial environments, with a reinforced structure and sliding rollers for safe, efficient operation. We specialise in custom machine design, CNC/manual machining and industrial steel structures.", "techs": ["CAD design", "Reinforced structure", "Sliding rollers", "Full fabrication"]}, "pt": {"cliente": "Indústria logística", "ttl": "Projeto e fabricação de trocador de baterias para empilhadeiras", "desc": "Sistema desenvolvido 100% na Plusermec, do projeto em CAD à fabricação completa. Facilita a troca de baterias de empilhadeiras com estrutura reforçada e roletes de deslizamento.", "desc_larga": "Quando o trabalho exige segurança, precisão e rapidez, não há margem para erro. Este sistema foi desenvolvido 100% na Plusermec, do projeto em CAD até sua fabricação completa. Pensado para facilitar a troca de baterias de empilhadeiras em ambientes industriais, com estrutura reforçada e roletes de deslizamento para operação segura e eficiente. Somos especialistas em projeto de máquinas sob medida, usinagem CNC/manual e estruturas metálicas industriais.", "techs": ["Projeto CAD", "Estrutura reforçada", "Roletes de deslizamento", "Fabricação integral"]}}, "p5": {"en": {"cliente": "Metalworking client", "ttl": "Sluice grinding with Hardox hardfacing", "desc": "Precise grinding of a sluice bore and application of Hardox as a wear-resistant coating to extend the service life of the part.", "desc_larga": "The Hardox (high-hardness wear-resistant steel) was welded, machined and adjusted to tolerance on the original part. The intervention extended the estimated service life from 3 months to over 2 years of continuous operation. Process: disassembly → Hardox welding → finish boring → dimensional inspection.", "techs": ["Wear-resistant Hardox", "Special welding", "Finish boring", "Dimensional inspection"]}, "pt": {"cliente": "Cliente metalúrgico", "ttl": "Retificação de comporta com revestimento em Hardox", "desc": "Retificação precisa do furo da comporta e aplicação de Hardox como revestimento antidesgaste para prolongar a vida útil da peça.", "desc_larga": "O Hardox (aço antidesgaste de alta dureza) foi soldado, usinado e ajustado em tolerância sobre a peça original. A intervenção estendeu a vida útil estimada de 3 meses para mais de 2 anos de operação contínua. Processo: desmontagem → soldagem Hardox → mandrilamento de acabamento → controle dimensional.", "techs": ["Hardox antidesgaste", "Soldagem especial", "Mandrilamento de acabamento", "Controle dimensional"]}}, "p6": {"en": {"cliente": "Industrial client", "ttl": "Repair of a 4-metre hydraulic cylinder", "desc": "The cylinder was longer than the lathe. To machine it, parts had to be dismantled, supports adapted and components from other lathes used.", "desc_larga": "This job pushed us to the limit... literally. The hydraulic cylinder to be repaired was longer than the lathe, and to machine it we had to dismantle parts, adapt supports and use components from other lathes. It was not simple. We worked with care, judgement and experience, making technical decisions with minimal margin for error.", "techs": ["Large-scale turning", "Support adaptation", "Technical judgement", "Precision machining"]}, "pt": {"cliente": "Cliente industrial", "ttl": "Reparação de cilindro hidráulico de 4 metros", "desc": "O cilindro superava o comprimento do torno. Para usiná-lo foi necessário desmontar partes, adaptar suportes e usar componentes de outros tornos.", "desc_larga": "Este trabalho nos levou ao limite... literalmente. O cilindro hidráulico a reparar superava o comprimento do torno, e para usiná-lo foi necessário desmontar partes, adaptar suportes e usar componentes de outros tornos. Não foi simples. Trabalhou-se com cuidado, critério e experiência, tomando decisões técnicas com margem mínima de erro.", "techs": ["Torneamento de grande porte", "Adaptação de suportes", "Critério técnico", "Usinagem de precisão"]}}};
+function PL(p){var t=(LANG!=='es'&&PROY_TR[p.id])?PROY_TR[p.id][LANG]:null;return t?Object.assign({},p,t):p;}
+function sectorLabel(x){return (LANG!=='es'&&SECTOR_TR[x])?SECTOR_TR[x][LANG]:x;}
 // Render proyectos
 function renderProyectos() {
   const grid = document.getElementById('proyGrid');
   grid.innerHTML = PROYECTOS.map((p, i) => {
+    p = PL(p);
     const sc = SECTOR_COLORS[p.sector] || SECTOR_COLORS['Industrial'];
     return `
     <div class="proy-card rv d${(i%3)+1}" data-pid="${p.id}">
@@ -715,12 +721,12 @@ function renderProyectos() {
         <img src="${p.poster || (p.imgs && p.imgs[0]) || p.img}" alt="${p.ttl}">
         ${p.videoFile ? `<div class="proy-play"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="rgba(30,91,138,.9)"/><path d="M10 8.2l6 3.8-6 3.8z" fill="#fff"/></svg></div>` : ''}
         ${p.imgs && p.imgs.length > 1 ? `<div class="proy-count"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>${p.imgs.length}</div>` : ''}
-        <div class="proy-sector-badge" style="background:${sc.bg};color:${sc.color};border:1px solid ${sc.border}">${p.sector}</div>
+        <div class="proy-sector-badge" style="background:${sc.bg};color:${sc.color};border:1px solid ${sc.border}">${sectorLabel(p.sector)}</div>
       </div>
       <div class="proy-body">
         <div class="proy-client">
           <div class="proy-logo-ph">${p.clienteAbrev}</div>
-          <div><div class="proy-client-name">${p.cliente}</div><div class="proy-client-sector">${p.sector}</div></div>
+          <div><div class="proy-client-name">${p.cliente}</div><div class="proy-client-sector">${sectorLabel(p.sector)}</div></div>
         </div>
         <div class="proy-ttl">${p.ttl}</div>
         <div class="proy-desc">${p.desc}</div>
@@ -736,7 +742,7 @@ function renderProyectos() {
 }
 
 function openProyecto(pid) {
-  const p = PROYECTOS.find(x => x.id === pid);
+  const p = PL(PROYECTOS.find(x => x.id === pid));
   const sc = SECTOR_COLORS[p.sector] || SECTOR_COLORS['Industrial'];
   const modal = document.createElement('div');
   modal.className = 'modal open';
@@ -759,12 +765,12 @@ function openProyecto(pid) {
         <div>
           <div class="mbox-client">
             <div class="mbox-logo-ph">${p.clienteAbrev}</div>
-            <div><div class="mbox-cn">${p.cliente}</div><div class="mbox-cs">${p.sector}</div></div>
+            <div><div class="mbox-cn">${p.cliente}</div><div class="mbox-cs">${sectorLabel(p.sector)}</div></div>
           </div>
         </div>
         <button class="mbox-close" onclick="document.getElementById('pModal').remove()">✕</button>
       </div>
-      <div class="mbox-sector" style="background:${sc.bg};color:${sc.color};border:1px solid ${sc.border}">${p.sector}</div>
+      <div class="mbox-sector" style="background:${sc.bg};color:${sc.color};border:1px solid ${sc.border}">${sectorLabel(p.sector)}</div>
       <div class="mbox-ttl">${p.ttl}</div>
       <p class="mbox-desc">${p.desc_larga}</p>
       <div class="mbox-techs-ttl" data-i="techs_lbl">Tecnologías involucradas</div>
@@ -881,29 +887,38 @@ const CAT_SVG = {
   otros:`<svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>`,
 };
 const CAT_L={cnc:'CNC',torno:'Torno',ales:'Alesadora',fres:'Fresadora',otros:'Equipamiento'};
+const MQ_TR={"a1": {"en": {"nom": "CNC Machining Center", "desc": "High-precision vertical CNC machining center. Multiple operations in a single setup."}, "pt": {"nom": "Centro de Usinagem CNC", "desc": "Centro de usinagem vertical CNC de alta precisão. Múltiplas operações numa única fixação."}}, "a2": {"en": {"nom": "CNC Lathe", "desc": "Precision CNC lathe for medium-sized parts. Special threads and high-quality finishes."}, "pt": {"nom": "Torno CNC", "desc": "Torno CNC de precisão para peças de médio porte. Roscas especiais e acabamentos de alta qualidade."}}, "a3": {"en": {"nom": "CNC Lathe", "desc": "Long-bed CNC lathe for shafts and tubular parts up to 3 metres."}, "pt": {"nom": "Torno CNC", "desc": "Torno CNC de grande comprimento para eixos e peças tubulares até 3 metros."}}, "a4": {"en": {"nom": "CNC Lathe", "desc": "High-speed TRAUB CNC lathe for medium-to-high complexity runs."}, "pt": {"nom": "Torno CNC", "desc": "Torno CNC TRAUB de alta velocidade para séries de complexidade média-alta."}}, "a5": {"en": {"nom": "Parallel Lathe", "desc": "The highest-capacity lathe in the workshop. Ø2000mm swing for large gears, rings and rollers."}, "pt": {"nom": "Torno Paralelo", "desc": "O torno de maior capacidade da oficina. Ø2000mm de volteio para coroas, anéis e rolos de grande porte."}}, "a6": {"en": {"nom": "Parallel Lathe", "desc": "4000mm between centres for long, large-scale shafts in heavy industry."}, "pt": {"nom": "Torno Paralelo", "desc": "4000mm entre pontas para eixos longos de grande porte na indústria pesada."}}, "a7": {"en": {"nom": "Parallel Lathe", "desc": "Set of 3 lathes for parallel production. Ø680mm and 3000mm between centres."}, "pt": {"nom": "Torno Paralelo", "desc": "Série de 3 tornos para produção paralela. Ø680mm e 3000mm entre pontas."}}, "a8": {"en": {"nom": "Parallel Lathe", "desc": "Three lathes for batch work. Versatile for medium-sized parts."}, "pt": {"nom": "Torno Paralelo", "desc": "Três tornos para trabalho em série. Versáteis para peças de médio porte."}}, "a9": {"en": {"nom": "Large Boring Machine", "desc": "Horizontal boring machine with Ø100mm spindle. Key for trommels, bearings and large-scale components."}, "pt": {"nom": "Mandriladora de grande porte", "desc": "Mandriladora horizontal com fuso Ø100mm. Chave para trommels, rolamentos e componentes de grande escala."}}, "a10": {"en": {"nom": "Boring Machine", "desc": "Two medium boring machines with Ø55mm spindle for precision bores."}, "pt": {"nom": "Mandriladora", "desc": "Duas mandriladoras de médio porte com fuso Ø55mm para furos de precisão."}}, "a_new": {"en": {"nom": "Large Boring Machine", "desc": "New boring machine that significantly expands machining capacity. Enables mining, oil & gas and heavy-industry projects requiring exceptional diameters.", "marca": "New addition"}, "pt": {"nom": "Mandriladora de grande porte", "desc": "Nova mandriladora que amplia significativamente a capacidade de usinagem. Habilita projetos de mineração, oil & gas e indústria pesada que exigem diâmetros excepcionais.", "marca": "Nova aquisição"}}, "a11": {"en": {"nom": "Universal Milling Machine No.3", "desc": "High-capacity milling machines for face, profile and slot milling."}, "pt": {"nom": "Fresadora Universal N°3", "desc": "Fresadoras de alta capacidade para fresamento frontal, perfil e ranhuras."}}, "a12": {"en": {"nom": "Universal Milling Machine No.2", "desc": "Four milling machines for batch production. Versatile for multiple operations."}, "pt": {"nom": "Fresadora Universal N°2", "desc": "Quatro fresadoras para produção em série. Versatilidade para múltiplas operações."}}, "a13": {"en": {"nom": "Gear Hobbing Machine", "desc": "For manufacturing spur and helical gears for industrial transmissions."}, "pt": {"nom": "Geradora de Engrenagens", "desc": "Para fabricação de engrenagens retas e helicoidais de transmissões industriais."}}, "a14": {"en": {"nom": "Surface Grinder", "desc": "For high-precision surface finishes and perfect flatness."}, "pt": {"nom": "Retificadora Plana", "desc": "Para acabamentos superficiais de alta precisão e planicidade perfeita."}}, "a15": {"en": {"nom": "Hydraulic Press", "desc": "For bearing removal and fitting, press fits and shaft straightening."}, "pt": {"nom": "Prensa Hidráulica", "desc": "Para desmontagem e montagem de rolamentos, ajustes sob pressão e endireitamento de eixos."}}, "a16": {"en": {"nom": "TIG Welder", "desc": "Special welding: stainless steel, aluminium and special materials with arc control."}, "pt": {"nom": "Soldadora TIG", "desc": "Soldagem especial: inoxidável, alumínio e materiais especiais com controle do arco."}}, "a17": {"en": {"nom": "MIG/MAG Welder", "desc": "For structural work and high deposition rates on large-scale projects."}, "pt": {"nom": "Soldadora MIG/MAG", "desc": "Para trabalho estrutural e grande vazão em projetos de grande porte."}}};
+const SPEC_L_TR={"Mesa X": {"en": "Table X", "pt": "Mesa X"}, "Mesa Y": {"en": "Table Y", "pt": "Mesa Y"}, "Mesa Z": {"en": "Table Z", "pt": "Mesa Z"}, "Cant.": {"en": "Qty", "pt": "Qtd."}, "Diámetro": {"en": "Diameter", "pt": "Diâmetro"}, "Entre puntas": {"en": "Between centres", "pt": "Entre pontas"}, "Control": {"en": "Control", "pt": "Controle"}, "Volteo": {"en": "Swing", "pt": "Volteio"}, "Tipo": {"en": "Type", "pt": "Tipo"}, "Husillo": {"en": "Spindle", "pt": "Fuso"}, "Módulo": {"en": "Module", "pt": "Módulo"}, "Engranajes": {"en": "Gears", "pt": "Engrenagens"}, "Capacidad": {"en": "Capacity", "pt": "Capacidade"}, "Uso": {"en": "Use", "pt": "Uso"}, "Fuerza": {"en": "Force", "pt": "Força"}, "Potencia": {"en": "Power", "pt": "Potência"}, "Materiales": {"en": "Materials", "pt": "Materiais"}, "Precisión": {"en": "Precision", "pt": "Precisão"}};
+const VAL_TR={"Paralelo": {"en": "Parallel", "pt": "Paralelo"}, "Universal": {"en": "Universal", "pt": "Universal"}, "Creadora": {"en": "Hobbing", "pt": "Geradora"}, "Plana": {"en": "Surface", "pt": "Plana"}, "Hidráulica": {"en": "Hydraulic", "pt": "Hidráulica"}, "Rectos/helicoidales": {"en": "Spur/helical", "pt": "Retos/helicoidais"}, "Estructural": {"en": "Structural", "pt": "Estrutural"}, "Montaje/desmontaje": {"en": "Assembly/disassembly", "pt": "Montagem/desmontagem"}, "Acabado": {"en": "Finishing", "pt": "Acabamento"}, "Gran Ø": {"en": "Large Ø", "pt": "Grande Ø"}, "Alta": {"en": "High", "pt": "Alta"}};
+const CAT_L_TR={"en": {"cnc": "CNC", "torno": "Lathe", "ales": "Boring", "fres": "Milling", "otros": "Equipment"}, "pt": {"cnc": "CNC", "torno": "Torno", "ales": "Mandriladora", "fres": "Fresadora", "otros": "Equipamento"}};
+function ML(m){var t=(LANG!=='es'&&MQ_TR[m.id])?MQ_TR[m.id][LANG]:null;return t?Object.assign({},m,t):m;}
+function specL(l){return (LANG!=='es'&&SPEC_L_TR[l])?SPEC_L_TR[l][LANG]:l;}
+function specV(v){return (LANG!=='es'&&VAL_TR[v])?VAL_TR[v][LANG]:v;}
+function catLabel(c){return (LANG!=='es'&&CAT_L_TR[LANG]&&CAT_L_TR[LANG][c])?CAT_L_TR[LANG][c]:CAT_L[c];}
+function nuevaLabel(){return LANG==='en'?'New':LANG==='pt'?'Nova':'Nueva';}
 
 function renderList(cat){
   const list=document.getElementById('maqList');
   const items=cat==='all'?MQ:MQ.filter(m=>m.cat===cat);
-  list.innerHTML=items.map(m=>`
+  list.innerHTML=items.map(mo=>{const m=ML(mo);return `
     <div class="mi${m.isNew?' active':''}" data-mid="${m.id}" onclick="showMaq('${m.id}')">
       <div class="mi-ico">${CAT_SVG[m.cat]}</div>
       <div>
         <div class="mi-top">
           <div class="mi-name">${m.nom}</div>
-          ${m.isNew?'<span class="mi-new">Nueva</span>':''}
+          ${m.isNew?`<span class="mi-new">${nuevaLabel()}</span>`:''}
         </div>
         <div class="mi-spec">${m.cap} · ${m.marca}</div>
         <div class="mi-qty">×${m.cant}</div>
       </div>
-    </div>`).join('');
+    </div>`;}).join('');
   // Auto-open primera máquina de la vista que tenga imagen
   const first=items.find(m=>m.img);
   if(first) setTimeout(()=>showMaq(first.id),100);
 }
 
 function showMaq(id){
-  const m=MQ.find(x=>x.id===id);
+  const m=ML(MQ.find(x=>x.id===id));
   document.querySelectorAll('.mi').forEach(el=>el.classList.toggle('active',el.dataset.mid===id));
   const det=document.getElementById('maqDet');
   const imgHtml=m.img
@@ -913,10 +928,10 @@ function showMaq(id){
     <div>
       ${imgHtml}
       <div class="mdi-img-ph" style="${m.img?'display:none':'display:flex'}">${CAT_SVG[m.cat]}</div>
-      <div class="mdi-sg">${m.specs.map(s=>`<div class="mds"><div class="mds-l">${s.l}</div><div class="mds-v">${s.v}</div></div>`).join('')}</div>
+      <div class="mdi-sg">${m.specs.map(s=>`<div class="mds"><div class="mds-l">${specL(s.l)}</div><div class="mds-v">${specV(s.v)}</div></div>`).join('')}</div>
     </div>
     <div class="mdi-r">
-      <div class="mdi-cat">${CAT_L[m.cat]}${m.isNew?'<span class="mdi-new-badge">Nueva</span>':''}</div>
+      <div class="mdi-cat">${catLabel(m.cat)}${m.isNew?`<span class="mdi-new-badge">${nuevaLabel()}</span>`:''}</div>
       <div class="mdi-name">${m.nom}</div>
       <div class="mdi-marca">${m.marca}</div>
       <p class="mdi-desc">${m.desc}</p>
@@ -1103,11 +1118,11 @@ const T={
       id4:"Rollers, shafts, gears",id5:"Drying rollers, shafts",id6:"Agitators, heat exchangers",id7:"Structures, platforms",id8:"Rollers, precision parts",
       s_kick:"Technical capabilities",s_ttl:"What we do",s_sub:"Click each capability to see more detail.",
       s1n:"Precision machining",s2n:"Spare parts manufacturing",s3n:"Repair & maintenance",s4n:"Custom design & fabrication",s5n:"Special welding",
-      sd1p:"Travis CNC center (1500×700×640mm), CNC lathes Turri / PPL / Traub, parallel lathes up to Ø2000×3000mm.",
-      sd2p:"Manufacturing from drawings or samples. Spur and helical gears. CNC micro-machining.",
-      sd3p:"Hydraulic cylinders, 3m drums, 4m shafts. Preventive and corrective maintenance with on-site deployment.",
-      sd4p:"Conveyors, silos, pumps, heat exchangers. From CAD design to plant commissioning.",
-      sd5p:"Hardox, stainless steel, aluminum and high alloy. TIG and MIG Merle 500amp welders.",
+      sd1p:"Precision machining is the core of our work. We turn, mill, bore and grind industrial parts with tolerances from ±0.01mm, meeting the most demanding requirements of heavy industry. We work on transmission shafts, ring gears, industrial rollers, cylinder liners, flanges, raceways and any rotating or prismatic component. We machine carbon steels, AISI 304/316 stainless steels, bronzes, grey and nodular cast iron, and special alloys. For large parts we offer swing capacity up to Ø2000mm and 4000mm between centres — one of the largest in the region — with POREBA, TRAVIS, TURRI, PPL and TRAUB lathes, and a TRAVIS CNC Machining Center for multiple operations in a single setup.",
+      sd2p:"When a part breaks or wears out and no spare is available on the market, Plusermec manufactures it. We reproduce any mechanical component from a technical drawing, a physical sample or simply measurements taken on site. We manufacture spur, helical and bevel gears for industrial transmission gearboxes, as well as bushings, sleeves, thrust washers, keys, shafts and all kinds of machine elements. Our CNC milling machines allow micro-machining with cutters from 0.5mm for electrodes and high-precision dies. We work in steel, stainless steel, bronze, aluminium, engineering plastics and special materials.",
+      sd3p:"The goal of every repair is to return the part to its original operating condition — or improve it. We recover hydraulic cylinders with scored or worn rods, repair pump and industrial valve bodies, rebuild bearing seats with hard chrome or metallising, and correct geometries on parts damaged by impact or deformation. For equipment that cannot enter the workshop, we travel to the plant with portable equipment. We work within controlled downtime, coordinating with the client maintenance team to minimise the impact on production.",
+      sd4p:"When the market does not have what the production process needs, we design and build it. We develop custom industrial equipment: material handling systems (modular conveyors up to 22 metres), storage silos and hoppers, separators, pumps for solids and special handling devices. The process starts with a needs assessment, continues with CAD design including structural and process calculation, and ends with complete in-house manufacturing and assembly with our own team at the plant. We deliver equipment that works, not just built. Materials according to client or industry specification: structural steel, sanitary or industrial stainless steel, or special materials depending on the fluid or product in contact.",
+      sd5p:"Welding in heavy industry is not just joining parts: it is guaranteeing structural integrity under extreme conditions of load, vibration, temperature or abrasion. At Plusermec we work with TIG and MIG/MAG processes on AISI 304 and 316 stainless steels, aluminium, high-alloy steels and Hardox. We apply Hardox 400 and 500 hardfacing on surfaces exposed to severe abrasion — a technique that can multiply the service life of a part five times or more. We also carry out large structural constructions: frames, support structures, walkways and equipment over 10 tonnes. Our staff is qualified in welding procedures for critical industrial applications.",
       m_kick:"Technical fleet",m_ttl:"Our machinery",m_sub:"Select a machine to see its full technical specifications.",
       ml_t:"Equipment",ml_s:"20 machines",cat_all:"All",cat_cnc:"CNC",cat_tor:"Lathes",cat_ale:"Boring",cat_fre:"Milling",cat_otr:"Other",
       maq_sel:"Select a machine",
@@ -1133,11 +1148,11 @@ const T={
       id4:"Rolos, eixos, engrenagens",id5:"Rolos secadores, eixos",id6:"Agitadores, trocadores",id7:"Estruturas, plataformas",id8:"Rolos, peças de precisão",
       s_kick:"Capacidades técnicas",s_ttl:"O que fazemos",s_sub:"Clique em cada capacidade para ver mais detalhes.",
       s1n:"Usinagem de precisão",s2n:"Fabricação de peças",s3n:"Reparação e manutenção",s4n:"Projeto e fabricação sob medida",s5n:"Soldagem especial",
-      sd1p:"Centro CNC Travis, tornos CNC Turri / PPL / Traub, tornos paralelos até Ø2000×3000mm.",
-      sd2p:"Fabricação sobre desenhos ou amostras. Engrenagens retas e helicoidais. Microusinagem CNC.",
-      sd3p:"Cilindros hidráulicos, tromeles de 3m, eixos de 4m. Manutenção preventiva e corretiva com deslocamento.",
-      sd4p:"Correias, silos, bombas, trocadores. Do projeto CAD até a operação em planta.",
-      sd5p:"Hardox, inox, alumínio e alta liga. Soldadoras TIG e MIG Merle 500amp.",
+      sd1p:"A usinagem de precisão é o núcleo do nosso trabalho. Torneamos, fresamos, mandrilamos e retificamos peças industriais com tolerâncias a partir de ±0,01mm, atendendo às exigências mais rigorosas da indústria pesada. Trabalhamos eixos de transmissão, coroas dentadas, rolos industriais, camisas de cilindro, flanges, pistas de rolamento e qualquer componente rotativo ou prismático. Operamos em aços ao carbono, inoxidáveis AISI 304/316, bronzes, ferro fundido cinzento e nodular, e ligas especiais. Para peças de grande porte contamos com capacidade de volteio até Ø2000mm e 4000mm entre pontas — uma das maiores da região — com tornos POREBA, TRAVIS, TURRI, PPL e TRAUB, e um Centro de Usinagem CNC TRAVIS para múltiplas operações numa única fixação.",
+      sd2p:"Quando uma peça quebra ou se desgasta e não há reposição disponível no mercado, a Plusermec a fabrica. Reproduzimos qualquer componente mecânico a partir de um desenho técnico, uma amostra física ou simplesmente das medidas levantadas em planta. Fabricamos engrenagens retas, helicoidais e cônicas para caixas de transmissão industrial, assim como buchas, casquilhos, arruelas de encosto, chavetas, eixos e todo tipo de elementos de máquinas. Nossas fresadoras CNC permitem microusinagens com fresas a partir de 0,5mm para eletrodos e matrizes de alta precisão. Trabalhamos em aço, inoxidável, bronze, alumínio, plástico de engenharia e materiais especiais.",
+      sd3p:"O objetivo de cada intervenção de reparação é devolver a peça às suas condições originais de operação — ou melhorá-las. Recuperamos cilindros hidráulicos com hastes riscadas ou desgastadas, reparamos corpos de bombas e válvulas industriais, reconstruímos assentos de rolamentos com cromo duro ou metalização, e corrigimos geometrias em peças que sofreram impactos ou deformações. Para equipamentos que não podem entrar na oficina, deslocamo-nos à planta com equipamento portátil. Trabalhamos sob tempo de parada controlado, coordenando com a área de manutenção do cliente para minimizar o impacto na produção.",
+      sd4p:"Quando o mercado não tem o que o processo produtivo precisa, nós o projetamos e construímos. Desenvolvemos equipamentos industriais sob medida: sistemas de transporte de material (correias modulares de até 22 metros), silos e tremonhas de armazenamento, separadores, bombas para sólidos e dispositivos de manipulação especiais. O processo parte do levantamento de necessidades, continua com o projeto em CAD com cálculo estrutural e de processo, e termina com a fabricação completa na oficina e a montagem com equipe própria na planta. Entregamos o equipamento funcionando, não apenas fabricado. Materiais conforme especificação do cliente ou indústria: aço estrutural, inoxidável sanitário ou industrial, ou materiais especiais conforme o fluido ou produto em contato.",
+      sd5p:"A soldagem na indústria pesada não é apenas unir peças: é garantir integridade estrutural sob condições extremas de carga, vibração, temperatura ou abrasão. Na Plusermec trabalhamos com processos TIG e MIG/MAG sobre aços inoxidáveis AISI 304 e 316, alumínio, aços de alta liga e Hardox. Aplicamos revestimentos de Hardox 400 e 500 sobre superfícies expostas a abrasão severa — uma técnica que pode multiplicar por cinco ou mais a vida útil de uma peça. Realizamos também construções estruturais de grande porte: bastidores, estruturas de suporte, passarelas e equipamentos de mais de 10 toneladas. Nosso pessoal é qualificado em procedimentos de soldagem para aplicações industriais críticas.",
       m_kick:"Parque técnico",m_ttl:"Nosso maquinário",m_sub:"Selecione uma máquina para ver as especificações técnicas.",
       ml_t:"Equipamento",ml_s:"20 máquinas",cat_all:"Todas",cat_cnc:"CNC",cat_tor:"Tornos",cat_ale:"Mandriladoras",cat_fre:"Fresadoras",cat_otr:"Outros",
       maq_sel:"Selecione uma máquina",
@@ -1147,10 +1162,13 @@ const T={
       f_kick:"Formulário",fo1:"Selecione um serviço",f_btn:"Enviar consulta",f_ok:"✓ Consulta enviada. Entraremos em contato.",cp_r:"Contato"}
 };
 function setLang(l){
-  document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('active',b.textContent===l.toUpperCase()));
+  LANG=l;
+  document.querySelectorAll('.lnb').forEach(b=>b.classList.toggle('active',b.textContent.trim().toLowerCase()===l));
   const t=T[l];
   document.querySelectorAll('[data-i]').forEach(el=>{const k=el.dataset.i;if(t[k]!==undefined)el.innerHTML=t[k];});
   document.querySelectorAll('[data-ph]').forEach(el=>{const k=el.dataset.ph;if(t[k])el.placeholder=t[k];});
+  if(document.getElementById('proyGrid')) renderProyectos();
+  const ac=document.querySelector('.mcb.active'); if(ac) renderList(ac.dataset.cat);
 }
 
 
