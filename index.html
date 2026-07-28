@@ -244,6 +244,12 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--fondo);color:va
 .proy-desc{font-size:12px;color:var(--txtm);line-height:1.65;font-weight:300;margin-bottom:14px}
 .proy-techs{display:flex;gap:5px;flex-wrap:wrap}
 .ptech{background:var(--fondo2);color:var(--txtm);font-size:10px;font-weight:500;padding:3px 10px;border-radius:20px}
+/* badges de card: play (video) y contador de fotos */
+.proy-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.proy-play svg{width:56px;height:56px;filter:drop-shadow(0 3px 10px rgba(0,0,0,.45));transition:transform .3s}
+.proy-card:hover .proy-play svg{transform:scale(1.1)}
+.proy-count{position:absolute;bottom:12px;right:12px;background:rgba(12,35,64,.62);color:#fff;font-size:10px;font-weight:600;letter-spacing:.3px;padding:3px 10px;border-radius:12px;display:flex;align-items:center;gap:5px;backdrop-filter:blur(4px)}
+.proy-count svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:1.8}
 
 /* Modal proyecto */
 .modal{display:none;position:fixed;inset:0;background:rgba(12,35,64,.88);z-index:500;align-items:center;justify-content:center;padding:20px}
@@ -251,6 +257,15 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--fondo);color:va
 .mbox{background:var(--blanco);max-width:700px;width:100%;border-radius:16px;overflow:hidden;animation:msl .35s cubic-bezier(.22,1,.36,1);max-height:90vh;overflow-y:auto}
 @keyframes msl{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:none}}
 .mbox-img{width:100%;height:340px;object-fit:contain;background:var(--az);display:block}
+.mbox-vid{width:100%;max-height:62vh;background:#000;display:block}
+.mbox-gal{position:relative;background:var(--az)}
+.mbox-gal-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.mbox-gal-track::-webkit-scrollbar{display:none}
+.mbox-gal-track img{flex:0 0 100%;width:100%;height:360px;object-fit:contain;background:var(--az);scroll-snap-align:start;display:block}
+.mbox-gal-btn{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border:none;border-radius:50%;background:rgba(255,255,255,.92);cursor:pointer;font-size:20px;line-height:1;color:var(--az);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.25);z-index:2;padding:0}
+.mbox-gal-btn:hover{background:#fff}
+.mbox-gal-prev{left:10px}.mbox-gal-next{right:10px}
+.mbox-gal-count{position:absolute;bottom:10px;right:12px;background:rgba(0,0,0,.5);color:#fff;font-size:11px;font-weight:600;padding:3px 9px;border-radius:12px}
 .mbox-body{padding:28px 30px}
 .mbox-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px}
 .mbox-close{background:var(--fondo);border:1px solid var(--b);width:30px;height:30px;border-radius:50%;font-size:15px;cursor:pointer;color:var(--txtm);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
@@ -641,57 +656,51 @@ const SECTOR_COLORS = {
 const PROYECTOS = [
   {
     id:'p1', sector:'Alimentos', cliente:'Industria Avícola', clienteAbrev:'IA',
-    img:'imgs/s4-2.jpg',
+    poster:'imgs/pv-cinta.jpg', videoFile:'vids/cinta.mp4',
     ttl:'Cinta transportadora doble — 22 m de longitud',
     desc:'Sistema de evacuación de residuos de proceso con dos cintas paralelas. 22 metros de longitud y 5 metros de altura con descarga directa sobre volquetes.',
     desc_larga:'Proyecto de diseño y fabricación integral: desde el relevamiento de necesidades, el diseño estructural en CAD, la fabricación completa en taller y la puesta en marcha en planta. El sistema opera en condiciones de alta humedad y temperatura, por lo que se priorizaron materiales anticorrosivos y un diseño de fácil mantenimiento.',
-    techs:['Diseño CAD','Fabricación estructural','Mecanizado CNC','Puesta en marcha'],
-    video: null
+    techs:['Diseño CAD','Fabricación estructural','Mecanizado CNC','Puesta en marcha']
   },
   {
     id:'p2', sector:'Industrial', cliente:'Cliente industrial', clienteAbrev:'CI',
-    img:'imgs/s1-5.jpg',
+    poster:'imgs/pv-tromel.jpg', videoFile:'vids/tromel.mp4',
     ttl:'Recuperación de pista en tromel industrial — Ø 3 metros',
     desc:'Reemplazo y mecanizado de la pista de rodadura de un tromel de 3 metros de diámetro, pieza clave en un sistema de producción continua.',
     desc_larga:'La pista original presentaba desgaste severo. Se desmontó y soldó una nueva pista en taller. Se adaptó la alesadora de gran porte para mecanizar un diámetro fuera de rango. Ajustes finos para alineación y concentricidad. Montaje en planta garantizando funcionamiento sin vibraciones. Plazo de entrega: 12 días.',
-    techs:['Alesado de gran porte','Soldadura estructural','Ajuste de precisión','Montaje in situ'],
-    video: null
+    techs:['Alesado de gran porte','Soldadura estructural','Ajuste de precisión','Montaje in situ']
   },
   {
     id:'p3', sector:'Industrial', cliente:'Planta industrial', clienteAbrev:'PI',
-    img:'imgs/s4-4.jpg',
+    imgs:['imgs/proy-estr-1.jpg','imgs/proy-estr-2.jpg','imgs/proy-estr-3.jpg','imgs/proy-estr-4.jpg'],
     ttl:'Fabricación y montaje de estructura metálica',
     desc:'Estructura de gran porte para planta industrial. Diseño, corte, soldadura y montaje íntegramente realizados por el equipo de Plusermec.',
     desc_larga:'Proyecto llave en mano que incluyó el relevamiento en planta, el diseño estructural, la fabricación completa en taller y el montaje con equipo propio. Material: acero estructural de alta resistencia. Soldadura certificada. Carga de diseño: 20 toneladas.',
-    techs:['Diseño estructural','Soldadura de alta resistencia','Montaje industrial','Coordinación logística'],
-    video: null
+    techs:['Diseño estructural','Soldadura de alta resistencia','Montaje industrial','Coordinación logística']
   },
   {
-    id:'p4', sector:'Industrial', cliente:'Empresa manufacturera', clienteAbrev:'EM',
-    img:'imgs/s4-6.jpg',
-    ttl:'Diseño y fabricación de silo industrial a medida',
-    desc:'Silo de almacenamiento para producto sólido. Capacidad y dimensiones adaptadas al requerimiento específico del cliente.',
-    desc_larga:'El proyecto incluyó el cálculo de capacidad, diseño de tolva y boca de salida, fabricación en acero inoxidable AISI 304 y montaje en planta. Superficie interior pulida Ra 1,6. Conexiones según normas del cliente.',
-    techs:['Inoxidable AISI 304','Diseño de proceso','Fabricación a medida','Acabado sanitario'],
-    video: null
+    id:'p4', sector:'Industrial', cliente:'Industria logística', clienteAbrev:'IL',
+    imgs:['imgs/proy-inter-1.jpg','imgs/proy-inter-2.jpg'],
+    ttl:'Diseño y fabricación de intercambiador de baterías para autoelevadores',
+    desc:'Sistema desarrollado 100% en Plusermec, del diseño en CAD a la fabricación completa. Facilita el cambio de baterías de autoelevadores con estructura reforzada y rodillos de deslizamiento.',
+    desc_larga:'Cuando el trabajo exige seguridad, precisión y rapidez, no hay margen de error. Este sistema fue desarrollado 100% en Plusermec, desde el diseño en CAD hasta su fabricación completa. Pensado para facilitar el cambio de baterías de autoelevadores en ambientes industriales, con estructura reforzada y rodillos de deslizamiento para operación segura y eficiente. Somos especialistas en diseño de máquinas a medida, mecanizados CNC/manuales y estructuras metálicas industriales.',
+    techs:['Diseño CAD','Estructura reforzada','Rodillos de deslizamiento','Fabricación integral']
   },
   {
     id:'p5', sector:'Industrial', cliente:'Cliente metalúrgico', clienteAbrev:'CM',
-    img:'imgs/s3-2.jpg',
+    poster:'imgs/pv-esclusa.jpg', videoFile:'vids/esclusa.mp4',
     ttl:'Rectificación de esclusa con enchapado en Hardox',
     desc:'Rectificación precisa de agujero de esclusa y aplicación de Hardox como recubrimiento anti desgaste para extender la vida útil de la pieza.',
     desc_larga:'El Hardox (acero anti desgaste de alta dureza) fue soldado, mecanizado y ajustado en tolerancia sobre la pieza original. La intervención extendió la vida útil estimada de 3 meses a más de 2 años de operación continua. Proceso: desmontaje → soldadura Hardox → alesado de terminación → control dimensional.',
-    techs:['Hardox anti desgaste','Soldadura especial','Alesado de terminación','Control dimensional'],
-    video: null
+    techs:['Hardox anti desgaste','Soldadura especial','Alesado de terminación','Control dimensional']
   },
   {
-    id:'p6', sector:'Industrial', cliente:'Industria del plástico', clienteAbrev:'IP',
-    img:'imgs/s3-3.jpg',
-    ttl:'Reparación de triturador molino para reciclado de plástico',
-    desc:'Reparación y cambio de rodamientos en triturador industrial. Restauración de dimensiones originales con mecanizado de precisión.',
-    desc_larga:'El eje principal del triturador presentaba desgaste en asientos de rodamientos. Se realizó el mecanizado de los asientos, el montaje de rodamientos nuevos con ajuste a presión en prensa hidráulica 100T y la verificación de alineación. Tiempo de intervención: 48 horas para no parar la línea más de lo necesario.',
-    techs:['Mecanizado de ejes','Prensa hidráulica 100T','Rodamientos industriales','Alineación láser'],
-    video: null
+    id:'p6', sector:'Industrial', cliente:'Cliente industrial', clienteAbrev:'CI',
+    poster:'imgs/pv-cilindro.jpg', videoFile:'vids/cilindro.mp4',
+    ttl:'Reparación de cilindro hidráulico de 4 metros',
+    desc:'El cilindro superaba el largo del torno. Para mecanizarlo hubo que desarmar partes, adaptar soportes y usar componentes de otros tornos.',
+    desc_larga:'Este trabajo nos llevó al límite... literalmente. El cilindro hidráulico a reparar superaba el largo del torno, y para mecanizarlo fue necesario desarmar partes, adaptar soportes y usar componentes de otros tornos. No fue simple. Se trabajó con cuidado, criterio y experiencia, tomando decisiones técnicas con margen mínimo de error.',
+    techs:['Torneado de gran porte','Adaptación de soportes','Criterio técnico','Mecanizado de precisión']
   },
 ];
 
@@ -703,7 +712,9 @@ function renderProyectos() {
     return `
     <div class="proy-card rv d${(i%3)+1}" data-pid="${p.id}">
       <div class="proy-img">
-        <img src="${p.img}" alt="${p.ttl}">
+        <img src="${p.poster || (p.imgs && p.imgs[0]) || p.img}" alt="${p.ttl}">
+        ${p.videoFile ? `<div class="proy-play"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="rgba(30,91,138,.9)"/><path d="M10 8.2l6 3.8-6 3.8z" fill="#fff"/></svg></div>` : ''}
+        ${p.imgs && p.imgs.length > 1 ? `<div class="proy-count"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>${p.imgs.length}</div>` : ''}
         <div class="proy-sector-badge" style="background:${sc.bg};color:${sc.color};border:1px solid ${sc.border}">${p.sector}</div>
       </div>
       <div class="proy-body">
@@ -730,10 +741,19 @@ function openProyecto(pid) {
   const modal = document.createElement('div');
   modal.className = 'modal open';
   modal.id = 'pModal';
+  let media;
+  if (p.videoFile) {
+    media = `<video class="mbox-vid" controls playsinline preload="metadata" poster="${p.poster||''}"><source src="${p.videoFile}" type="video/mp4"></video>`;
+  } else if (p.imgs && p.imgs.length) {
+    media = `<div class="mbox-gal">
+      <div class="mbox-gal-track">${p.imgs.map(s=>`<img src="${s}" alt="${p.ttl}">`).join('')}</div>
+      ${p.imgs.length>1 ? `<button class="mbox-gal-btn mbox-gal-prev" type="button" aria-label="Anterior">‹</button><button class="mbox-gal-btn mbox-gal-next" type="button" aria-label="Siguiente">›</button><div class="mbox-gal-count">1 / ${p.imgs.length}</div>` : ''}
+    </div>`;
+  } else {
+    media = `<img class="mbox-img" src="${p.img}" alt="${p.ttl}">`;
+  }
   modal.innerHTML = `<div class="mbox">
-    ${p.video
-      ? `<div style="position:relative;padding-bottom:56.25%;background:#000"><iframe style="position:absolute;inset:0;width:100%;height:100%;border:none" src="https://www.youtube.com/embed/${p.video}" allowfullscreen></iframe></div>`
-      : `<img class="mbox-img" src="${p.img}" alt="${p.ttl}">`}
+    ${media}
     <div class="mbox-body">
       <div class="mbox-hd">
         <div>
@@ -753,6 +773,17 @@ function openProyecto(pid) {
   </div>`;
   document.body.appendChild(modal);
   modal.addEventListener('click', e => { if(e.target === modal) modal.remove(); });
+  // galería de fotos (proyectos con varias imágenes)
+  const track = modal.querySelector('.mbox-gal-track');
+  if (track && track.querySelectorAll('img').length > 1) {
+    const imgs = track.querySelectorAll('img');
+    const cnt = modal.querySelector('.mbox-gal-count');
+    let idx = 0;
+    const go = n => { idx = Math.max(0, Math.min(imgs.length-1, n)); track.scrollTo({left:idx*track.offsetWidth, behavior:'smooth'}); if(cnt) cnt.textContent = `${idx+1} / ${imgs.length}`; };
+    modal.querySelector('.mbox-gal-prev').addEventListener('click', ()=>go(idx-1));
+    modal.querySelector('.mbox-gal-next').addEventListener('click', ()=>go(idx+1));
+    track.addEventListener('scroll', ()=>{ const n=Math.round(track.scrollLeft/track.offsetWidth); if(n!==idx){ idx=n; if(cnt) cnt.textContent=`${idx+1} / ${imgs.length}`; } }, {passive:true});
+  }
 }
 
 // ── SCROLL REVEAL ──────────────────────────────────────────────────────────
@@ -1042,11 +1073,11 @@ const T={
       id4:"Rodillos, ejes, engranajes",id5:"Rodillos, ejes, bombas",id6:"Agitadores, intercambiadores",id7:"Estructuras, plataformas",id8:"Rodillos, piezas de precisión",
       s_kick:"Capacidades técnicas",s_ttl:"Lo que hacemos",s_sub:"Clic en cada capacidad para ver más detalle.",
       s1n:"Mecanizado de precisión",s2n:"Fabricación de repuestos",s3n:"Reparación y mantenimiento",s4n:"Diseño y fabricación a medida",s5n:"Soldaduras especiales",
-      sd1p:"Centro CNC Travis (1500×700×640mm), tornos CNC Turri / PPL / Traub, tornos paralelos hasta Ø2000×3000mm.",
-      sd2p:"Fabricación sobre planos o muestras. Engranajes rectos y helicoidales. Micromecanizados CNC.",
-      sd3p:"Cilindros hidráulicos, tromeles de 3m, ejes de 4m. Mantenimiento preventivo y correctivo con desplazamiento a planta.",
-      sd4p:"Cintas transportadoras, silos, bombas, intercambiadores. Desde CAD hasta puesta en marcha.",
-      sd5p:"Hardox, inoxidables, aluminio y alta aleación. Soldadoras TIG y MIG Merle 500amp.",
+      sd1p:"El mecanizado de precisión es el núcleo de nuestro trabajo. Torneamos, fresamos, alesamos y rectificamos piezas industriales con tolerancias desde ±0,01mm, cumpliendo los requerimientos más exigentes de la industria pesada. Trabajamos ejes de transmisión, coronas dentadas, rodillos industriales, camisas de cilindro, bridas, pistas de rodadura y cualquier componente rotativo o prismático. Operamos en aceros al carbono, inoxidables AISI 304/316, bronces, fundición gris y nodular, y aleaciones especiales. Para piezas de gran porte, contamos con capacidad de volteo hasta Ø2000mm y 4000mm entre puntas — una de las mayores de la región — con tornos POREBA, TRAVIS, TURRI, PPL y TRAUB, y un Centro de Mecanizado CNC TRAVIS para operaciones múltiples en una sola sujección.",
+      sd2p:"Cuando una pieza se rompe o se desgasta y no hay repuesto disponible en el mercado, Plusermec la fabrica. Reproducimos cualquier componente mecánico a partir de un plano técnico, una muestra física o simplemente las medidas relevadas en planta. Fabricamos engranajes rectos, helicoidales y cónicos para cajas de transmisión industrial, así como bujes, casquillos, arandelas de empuje, chavetas, árboles y todo tipo de elementos de máquinas. Nuestras fresadoras CNC permiten micromecanizados con fresas desde 0,5mm para electrodos y matrices de alta precisión. Trabajamos en acero, inoxidable, bronce, aluminio, plástico de ingeniería y materiales especiales.",
+      sd3p:"El objetivo de cada intervención de reparación es devolver la pieza a sus condiciones originales de operación — o mejorarlas. Recuperamos cilindros hidráulicos con vástagos rayados o desgastados, reparamos cuerpos de bombas y válvulas industriales, reconstruimos asientos de rodamientos con cromado duro o metalización, y corregimos geometrías en piezas que sufrieron impactos o deformaciones. Para equipos que no pueden ingresar al taller, nos desplazamos a planta con equipamiento portátil. Trabajamos bajo tiempo de parada controlado, coordinando con el área de mantenimiento del cliente para minimizar el impacto en la producción.",
+      sd4p:"Cuando el mercado no tiene lo que el proceso productivo necesita, lo diseñamos y construimos. Desarrollamos equipos industriales a medida: sistemas de transporte de material (cintas modulares de hasta 22 metros), silos y tolvas de almacenamiento, separadores, bombas para sólidos y dispositivos de manipulación especiales. El proceso parte del relevamiento de necesidades, continúa con el diseño en CAD con cálculo estructural y de proceso, y termina con la fabricación completa en taller y el montaje con equipo propio en planta. Entregamos el equipo funcionando, no solo fabricado. Materiales según especificación del cliente o industria: acero estructural, inoxidable sanitario o industrial, o materiales especiales según el fluido o producto en contacto.",
+      sd5p:"La soldadura en la industria pesada no es solo unir piezas: es garantizar integridad estructural bajo condiciones extremas de carga, vibración, temperatura o abrasión. En Plusermec trabajamos con procesos TIG y MIG/MAG sobre aceros inoxidables AISI 304 y 316, aluminio, aceros de alta aleación y Hardox. Aplicamos recubrimientos de Hardox 400 y 500 sobre superficies expuestas a abrasión severa — una técnica que puede multiplicar por cinco o más la vida útil de una pieza. Realizamos también construcciones estructurales de gran porte: bastidores, estructuras de soporte, pasarelas y equipos de más de 10 toneladas. Nuestro personal está calificado en procedimientos de soldadura para aplicaciones industriales críticas.",
       m_kick:"Parque técnico",m_ttl:"Nuestra maquinaria",m_sub:"Seleccioná una máquina para ver sus especificaciones técnicas.",
       ml_t:"Equipamiento",ml_s:"20 máquinas",cat_all:"Todas",cat_cnc:"CNC",cat_tor:"Tornos",cat_ale:"Alesadoras",cat_fre:"Fresadoras",cat_otr:"Otros",
       maq_sel:"Seleccioná una máquina",
